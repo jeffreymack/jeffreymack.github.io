@@ -1,0 +1,104 @@
+body, html {
+  height: 100%;
+}
+
+.bg-image {
+  /* The image used */
+  background-image: url("https://thumbs-prod.si-cdn.com/miJUBa-03ieRqBECNvItOCWyZ9E=/fit-in/1072x0/https://public-media.si-cdn.com/filer/4a/45/4a458c3d-442d-49ed-a307-8fa8dc5f0f21/hs-2010-13-a-large_web.jpg");
+
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+:root {
+    --rintaro-red: #fd3935;
+    --rintaro-blue: #172950;
+    --rintaro-yellow: #ffef87;
+    --rintaro-turquoise: #39f4d7;
+    --rintaro-gray: #f7f7f7;
+    --rintaro-black: #242321;
+    --rintaro-white: #fff;
+    --rintaro-orange: #ff4b2d;
+}
+
+html {
+  border-top: 5px solid var(--rintaro-orange);
+}
+
+body {
+  background: var(--rintaro-white);
+  color: var(--rintaro-black);
+  font-family: 'Montserrat', "Helvetica", sans-serif;
+  font-size: 18px;
+  line-height: 1.4;
+  padding: 0;
+  margin: 35px 35px 140px;
+  max-width: 68ch;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 75px;
+}
+
+p {
+  max-width: 55ch;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+nav a {
+  display: inline-block;
+  font-size: 14px;
+  margin-right: 10px;
+  padding: 0px 0;
+}
+
+a {
+  color: var(--rintaro-black);
+  text-decoration: none;
+}
+
+p a,
+ul a,
+nav a {
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(40%, var(--rintaro-yellow)), color-stop(40%, transparent));
+    background-image: -webkit-linear-gradient(bottom, var(--rintaro-yellow) 40%, transparent 40%);
+    background-image: -o-linear-gradient(bottom, var(--rintaro-yellow) 40%, transparent 40%);
+    background-image: linear-gradient(0deg, var(--rintaro-yellow) 40%, transparent 40%)
+}
+
+a:hover {
+  background: var(--rintaro-yellow);
+  color: var(--rintaro-black);
+  text-decoration: none;
+}
+
+.lead {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 75px;
+}
+
+.foot {
+  font-size: 12px;
+  font-weight: 400px;
+}
+
+footer {
+  position: fixed;
+  margin: 35px 35px 35px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
