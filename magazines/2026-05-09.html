@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Edition — May 9, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0d;
+    --paper: #faf8f4;
+    --warm-white: #f5f2ec;
+    --accent-red: #c8372d;
+    --accent-gold: #d4a017;
+    --accent-blue: #1a3a5c;
+    --accent-green: #2d6a4f;
+    --accent-violet: #4a1d6e;
+    --mid-gray: #7a7570;
+    --light-gray: #e8e4dc;
+    --dark-bg: #0a0908;
+    --terminal-green: #00ff88;
+    color-scheme: light;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 17px; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 28px 5vw 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--accent-gold);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .masthead-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+  }
+  .masthead-vol {
+    font-size: 0.72rem;
+    color: #aaa;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── NAV ── */
+  .jump-nav {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--light-gray);
+    padding: 14px 5vw;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .jump-nav a {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid var(--light-gray);
+    border-radius: 3px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .jump-nav a:hover {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .jump-nav-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-right: 4px;
+  }
+
+  /* ── EDITORS NOTE ── */
+  .editors-note {
+    max-width: 860px;
+    margin: 60px auto;
+    padding: 0 5vw;
+  }
+  .editors-note-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-red);
+    margin-bottom: 16px;
+  }
+  .editors-note h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.08;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+  .editors-note p {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: #3a3530;
+    max-width: 680px;
+  }
+  .editors-note p + p { margin-top: 16px; }
+  .rule {
+    border: none;
+    border-top: 1px solid var(--light-gray);
+    margin: 48px 0;
+  }
+  .rule-bold {
+    border: none;
+    border-top: 3px solid var(--ink);
+    margin: 60px 0 48px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-number {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(6rem, 18vw, 14rem);
+    font-weight: 900;
+    line-height: 0.85;
+    color: var(--light-gray);
+    position: absolute;
+    top: -20px;
+    right: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ─────────────────────────────────────────
+     STORY LAYOUTS
+  ───────────────────────────────────────── */
+
+  /* S1 — HERO */
+  .story-hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 80px 5vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .story-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 80% 50%, rgba(212,160,23,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .story-hero .inner { max-width: 900px; margin: 0 auto; position: relative; }
+  .story-hero .story-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .story-hero .story-tag::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 2px;
+    background: var(--accent-gold);
+  }
+  .story-hero h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.07;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    max-width: 750px;
+  }
+  .story-hero .lead {
+    font-size: 1.18rem;
+    line-height: 1.72;
+    color: #ccc;
+    max-width: 680px;
+    margin-bottom: 28px;
+  }
+  .story-hero p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #aaa8a4;
+    max-width: 680px;
+    margin-bottom: 20px;
+  }
+  .lightning-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-red);
+    color: white;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .wtd-box {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-left: 3px solid var(--accent-gold);
+    padding: 24px 28px;
+    margin-top: 36px;
+    max-width: 680px;
+  }
+  .wtd-box-dark { /* for dark stories */ }
+  .wtd-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin-bottom: 14px;
+  }
+  .wtd-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .wtd-box ul li {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #ccc;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    gap: 10px;
+  }
+  .wtd-box ul li:last-child { border-bottom: none; }
+  .wtd-box ul li::before {
+    content: attr(data-icon);
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+  .date-stamp {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 8px;
+  }
+
+  /* S2 — MIDNIGHT DARK */
+  .story-dark {
+    background: #0e0c0b;
+    color: var(--paper);
+    padding: 80px 5vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .story-dark::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-violet), var(--accent-blue), var(--accent-green));
+  }
+  .story-dark .inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .story-dark .story-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9b9af0;
+    margin-bottom: 20px;
+  }
+  .story-dark h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    grid-column: 1 / -1;
+  }
+  .story-dark p {
+    font-size: 0.97rem;
+    line-height: 1.75;
+    color: #aaa8a4;
+    margin-bottom: 18px;
+  }
+  .dark-stat {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, #9b9af0, #c8a2e0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  .dark-stat-label {
+    font-size: 0.8rem;
+    color: #7a78a8;
+    font-weight: 500;
+    max-width: 200px;
+    line-height: 1.4;
+  }
+  .wtd-box-purple {
+    background: rgba(155,154,240,0.08);
+    border: 1px solid rgba(155,154,240,0.2);
+    border-left: 3px solid #9b9af0;
+    padding: 24px 28px;
+    margin-top: 28px;
+    grid-column: 1 / -1;
+  }
+  .wtd-box-purple .wtd-label { color: #9b9af0; }
+  .wtd-box-purple ul li { color: #bbb; border-bottom-color: rgba(255,255,255,0.06); }
+
+  /* S3 — ROSE ALERT */
+  .story-alert {
+    background: var(--warm-white);
+    padding: 80px 5vw;
+    position: relative;
+    border-top: 6px solid var(--accent-red);
+  }
+  .story-alert .inner { max-width: 900px; margin: 0 auto; }
+  .alert-stamp {
+    display: inline-block;
+    background: var(--accent-red);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    margin-bottom: 28px;
+    transform: rotate(-1deg);
+  }
+  .story-alert .story-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-red);
+    margin-bottom: 16px;
+  }
+  .story-alert h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4.5vw, 3.6rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    max-width: 750px;
+  }
+  .story-alert .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .story-alert p {
+    font-size: 0.97rem;
+    line-height: 1.78;
+    color: #3a3530;
+    margin-bottom: 18px;
+  }
+  .pull-quote-red {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent-red);
+    line-height: 1.3;
+    border-left: 4px solid var(--accent-red);
+    padding-left: 20px;
+    margin: 28px 0;
+  }
+  .wtd-box-red {
+    background: #fff0ee;
+    border: 1px solid #f0bdb9;
+    border-left: 3px solid var(--accent-red);
+    padding: 24px 28px;
+    margin-top: 28px;
+  }
+  .wtd-box-red .wtd-label { color: var(--accent-red); }
+  .wtd-box-red ul li { color: #3a3530; border-bottom-color: #f0bdb9; }
+  .wtd-box-red ul li::before { color: var(--accent-red); }
+
+  /* S4 — TERMINAL */
+  .story-terminal {
+    background: #0a0f0a;
+    color: var(--terminal-green);
+    padding: 80px 5vw;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    overflow: hidden;
+  }
+  .story-terminal::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(0deg, rgba(0,255,136,0.015) 0px, rgba(0,255,136,0.015) 1px, transparent 1px, transparent 3px);
+    pointer-events: none;
+  }
+  .story-terminal .inner { max-width: 900px; margin: 0 auto; position: relative; }
+  .terminal-prompt { color: #555; font-size: 0.85rem; margin-bottom: 6px; }
+  .terminal-prompt span { color: var(--terminal-green); }
+  .story-terminal .story-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #50c07a;
+    margin-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+  }
+  .story-terminal h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--terminal-green);
+    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
+  .story-terminal p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.78;
+    color: #a0c8b0;
+    margin-bottom: 18px;
+    max-width: 700px;
+  }
+  .terminal-data {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 36px 0;
+    max-width: 700px;
+  }
+  .terminal-data-item { border: 1px solid rgba(0,255,136,0.25); padding: 16px; }
+  .terminal-data-item .num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--terminal-green);
+    line-height: 1;
+  }
+  .terminal-data-item .lbl {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: #50c07a;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .wtd-box-terminal {
+    background: rgba(0,255,136,0.05);
+    border: 1px solid rgba(0,255,136,0.2);
+    border-left: 3px solid var(--terminal-green);
+    padding: 24px 28px;
+    margin-top: 28px;
+  }
+  .wtd-box-terminal .wtd-label { color: var(--terminal-green); font-family: 'Inter', sans-serif; }
+  .wtd-box-terminal ul li { color: #a0c8b0; border-bottom-color: rgba(0,255,136,0.1); font-family: 'Inter', sans-serif; }
+
+  /* S5 — ACADEMIC DROP CAP */
+  .story-academic {
+    background: white;
+    padding: 80px 5vw;
+    border-top: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .story-academic .inner { max-width: 720px; margin: 0 auto; }
+  .story-academic .story-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .story-academic .story-tag::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--light-gray);
+  }
+  .story-academic h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  .drop-cap::first-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 5.5rem;
+    font-weight: 900;
+    float: left;
+    line-height: 0.8;
+    margin: 4px 12px 0 0;
+    color: var(--accent-blue);
+  }
+  .story-academic p {
+    font-size: 1.05rem;
+    line-height: 1.82;
+    color: #3a3530;
+    margin-bottom: 22px;
+    clear: none;
+  }
+  .story-academic p.clear { clear: both; }
+  .footnote-box {
+    border-top: 2px solid var(--ink);
+    padding-top: 20px;
+    margin-top: 32px;
+  }
+  .footnote-box p {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--mid-gray);
+    margin-bottom: 8px;
+  }
+  .wtd-box-blue {
+    background: #f0f4f8;
+    border: 1px solid #c5d5e8;
+    border-left: 3px solid var(--accent-blue);
+    padding: 24px 28px;
+    margin-top: 28px;
+    clear: both;
+  }
+  .wtd-box-blue .wtd-label { color: var(--accent-blue); }
+  .wtd-box-blue ul li { color: #3a3530; border-bottom-color: #c5d5e8; }
+
+  /* S6 — BIG STAT */
+  .story-bigstat {
+    background: var(--accent-blue);
+    color: white;
+    padding: 80px 5vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .story-bigstat::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -60px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 80px solid rgba(255,255,255,0.05);
+  }
+  .story-bigstat .inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr; gap: 60px; align-items: start; position: relative; }
+  .big-stat-number {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(5rem, 14vw, 11rem);
+    font-weight: 900;
+    line-height: 0.9;
+    color: rgba(255,255,255,0.15);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .big-stat-number span {
+    position: absolute;
+    top: 0; left: 0;
+    color: white;
+    white-space: nowrap;
+  }
+  .story-bigstat .story-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 16px;
+  }
+  .story-bigstat h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .story-bigstat p {
+    font-size: 0.97rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 18px;
+  }
+  .wtd-box-navy {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-left: 3px solid rgba(255,255,255,0.6);
+    padding: 24px 28px;
+    margin-top: 28px;
+    grid-column: 1 / -1;
+  }
+  .wtd-box-navy .wtd-label { color: rgba(255,255,255,0.6); }
+  .wtd-box-navy ul li { color: rgba(255,255,255,0.72); border-bottom-color: rgba(255,255,255,0.1); }
+
+  /* S7 — PULL QUOTE EDITORIAL */
+  .story-editorial {
+    background: var(--paper);
+    padding: 80px 5vw;
+    position: relative;
+  }
+  .story-editorial .inner { max-width: 900px; margin: 0 auto; }
+  .story-editorial .story-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+    margin-bottom: 20px;
+  }
+  .story-editorial h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    max-width: 750px;
+  }
+  .editorial-grid { display: grid; grid-template-columns: 1fr 300px; gap: 48px; }
+  .story-editorial p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #3a3530;
+    margin-bottom: 18px;
+  }
+  .sidebar-quote {
+    border-top: 4px solid var(--ink);
+    padding-top: 20px;
+    position: sticky;
+    top: 80px;
+  }
+  .sidebar-quote blockquote {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  .sidebar-quote cite {
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+  }
+  .wtd-box-green {
+    background: #f0f7f4;
+    border: 1px solid #b0d4c0;
+    border-left: 3px solid var(--accent-green);
+    padding: 24px 28px;
+    margin-top: 28px;
+    grid-column: 1 / -1;
+  }
+  .wtd-box-green .wtd-label { color: var(--accent-green); }
+  .wtd-box-green ul li { color: #3a3530; border-bottom-color: #b0d4c0; }
+
+  /* S8 — FUTURISTIC DASHBOARD */
+  .story-dashboard {
+    background: #05080f;
+    color: white;
+    padding: 80px 5vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .story-dashboard::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(0,100,255,0.06) 0%, rgba(100,0,255,0.04) 50%, transparent 100%);
+    pointer-events: none;
+  }
+  .story-dashboard .inner { max-width: 900px; margin: 0 auto; position: relative; }
+  .story-dashboard .story-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #4a8fff;
+    margin-bottom: 20px;
+  }
+  .story-dashboard h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    max-width: 750px;
+  }
+  .dashboard-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 36px 0;
+  }
+  .metric-card {
+    border: 1px solid rgba(74,143,255,0.25);
+    background: rgba(74,143,255,0.06);
+    padding: 20px 16px;
+    position: relative;
+  }
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #4a8fff, transparent);
+  }
+  .metric-card .m-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #4a8fff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .metric-card .m-label {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+  }
+  .story-dashboard p {
+    font-size: 0.97rem;
+    line-height: 1.78;
+    color: rgba(255,255,255,0.68);
+    margin-bottom: 18px;
+    max-width: 700px;
+  }
+  .wtd-box-dash {
+    background: rgba(74,143,255,0.07);
+    border: 1px solid rgba(74,143,255,0.2);
+    border-left: 3px solid #4a8fff;
+    padding: 24px 28px;
+    margin-top: 28px;
+  }
+  .wtd-box-dash .wtd-label { color: #4a8fff; }
+  .wtd-box-dash ul li { color: rgba(255,255,255,0.7); border-bottom-color: rgba(74,143,255,0.15); }
+
+  /* S9 — NEWSPAPER */
+  .story-newspaper {
+    background: var(--warm-white);
+    padding: 80px 5vw;
+    border-top: 3px double var(--ink);
+    border-bottom: 3px double var(--ink);
+  }
+  .story-newspaper .inner { max-width: 900px; margin: 0 auto; }
+  .newspaper-header { text-align: center; border-bottom: 2px solid var(--ink); padding-bottom: 20px; margin-bottom: 36px; }
+  .newspaper-header .story-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 12px;
+  }
+  .story-newspaper h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .story-newspaper h2 em {
+    font-style: italic;
+    color: var(--accent-red);
+  }
+  .newspaper-cols { column-count: 2; column-gap: 40px; column-rule: 1px solid var(--light-gray); }
+  .story-newspaper p {
+    font-size: 0.95rem;
+    line-height: 1.76;
+    color: #3a3530;
+    margin-bottom: 16px;
+    break-inside: avoid;
+  }
+  .inset-stat {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 20px;
+    margin: 0 0 20px 20px;
+    float: right;
+    width: 200px;
+    text-align: center;
+    break-inside: avoid;
+  }
+  .inset-stat .big { font-family: 'Fraunces', serif; font-size: 3rem; font-weight: 900; color: var(--accent-gold); line-height: 1; }
+  .inset-stat .sm { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; margin-top: 6px; }
+  .wtd-box-newsprint {
+    background: white;
+    border: 2px solid var(--ink);
+    padding: 24px 28px;
+    margin-top: 28px;
+    clear: both;
+  }
+  .wtd-box-newsprint .wtd-label { color: var(--ink); }
+  .wtd-box-newsprint ul li { color: #3a3530; border-bottom-color: var(--light-gray); }
+
+  /* S10 — SWISS GRID */
+  .story-swiss {
+    background: white;
+    padding: 80px 5vw;
+    border-top: 8px solid var(--accent-gold);
+  }
+  .story-swiss .inner { max-width: 900px; margin: 0 auto; }
+  .swiss-header { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: end; margin-bottom: 40px; border-bottom: 1px solid var(--light-gray); padding-bottom: 32px; }
+  .swiss-big-num {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--accent-gold);
+  }
+  .story-swiss .story-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 12px;
+  }
+  .story-swiss h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .swiss-body { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .story-swiss p {
+    font-size: 0.97rem;
+    line-height: 1.78;
+    color: #3a3530;
+    margin-bottom: 18px;
+  }
+  .swiss-highlight {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 28px;
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.45;
+    align-self: start;
+  }
+  .swiss-highlight strong { font-style: normal; color: var(--accent-gold); }
+  .wtd-box-gold {
+    background: #fdf8ed;
+    border: 1px solid #e8d49a;
+    border-left: 3px solid var(--accent-gold);
+    padding: 24px 28px;
+    margin-top: 28px;
+    grid-column: 1 / -1;
+  }
+  .wtd-box-gold .wtd-label { color: #9a7010; }
+  .wtd-box-gold ul li { color: #3a3530; border-bottom-color: #e8d49a; }
+
+  /* ── PATTERNS ── */
+  .patterns-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 80px 5vw;
+  }
+  .patterns-section .inner { max-width: 900px; margin: 0 auto; }
+  .patterns-section .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .patterns-section .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+  }
+  .patterns-section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+  }
+  .pattern-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .pattern-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 24px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .pattern-card:hover { border-color: rgba(255,255,255,0.3); }
+  .pattern-num {
+    font-family: 'Fraunces', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    margin-bottom: 12px;
+    opacity: 0.7;
+  }
+  .pattern-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .pattern-card p {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: #a8a4a0;
+  }
+
+  /* ── IDEAS SECTION ── */
+  .ideas-section {
+    background: var(--warm-white);
+    padding: 80px 5vw;
+  }
+  .ideas-section .inner { max-width: 900px; margin: 0 auto; }
+  .ideas-section .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-violet);
+    margin-bottom: 20px;
+  }
+  .ideas-section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 36px;
+  }
+  .idea-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .idea-card {
+    border: 2px solid var(--ink);
+    padding: 28px;
+    position: relative;
+    background: white;
+    transition: transform 0.2s;
+  }
+  .idea-card:hover { transform: translateY(-3px); }
+  .idea-num {
+    font-family: 'Fraunces', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--light-gray);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .idea-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  .idea-card p {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--mid-gray);
+  }
+  .idea-hook {
+    font-family: 'Fraunces', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--accent-violet);
+    border-top: 1px solid var(--light-gray);
+    padding-top: 12px;
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  .mag-footer {
+    background: #0a0908;
+    color: #555;
+    padding: 32px 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-top: 1px solid #222;
+  }
+  .mag-footer span { color: #888; }
+
+  /* ── HOVER FX ── */
+  .story-hero .inner,
+  .story-dark .inner,
+  .story-alert .inner,
+  .story-editorial .inner,
+  .story-dashboard .inner,
+  .story-bigstat .inner { transition: opacity 0.3s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .story-dark .inner { grid-template-columns: 1fr; gap: 32px; }
+    .story-dark h2 { grid-column: 1; }
+    .story-alert .two-col { grid-template-columns: 1fr; gap: 24px; }
+    .editorial-grid { grid-template-columns: 1fr; }
+    .sidebar-quote { position: static; }
+    .dashboard-metrics { grid-template-columns: repeat(2, 1fr); }
+    .newspaper-cols { column-count: 1; }
+    .story-bigstat .inner { grid-template-columns: 1fr; gap: 32px; }
+    .big-stat-number { font-size: 4rem; }
+    .pattern-grid { grid-template-columns: 1fr; }
+    .idea-cards { grid-template-columns: 1fr; }
+    .swiss-body { grid-template-columns: 1fr; }
+    .swiss-header { grid-template-columns: 1fr; }
+    .terminal-data { grid-template-columns: repeat(2, 1fr); }
+    .wtd-box-purple, .wtd-box-navy, .wtd-box-gold { grid-column: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div>
+    <div class="masthead-title">Morning Edition</div>
+    <div class="masthead-vol">For Jeff Mack · Other Company</div>
+  </div>
+  <div style="text-align:right">
+    <div class="masthead-date">Saturday, May 9, 2026</div>
+    <div class="masthead-vol">10 Stories · Intelligence Briefing</div>
+  </div>
+</header>
+
+<!-- JUMP NAV -->
+<nav class="jump-nav">
+  <span class="jump-nav-label">Jump to →</span>
+  <a href="#s1">AI Consulting War</a>
+  <a href="#s2">Frontier Firms</a>
+  <a href="#s3">Anthropic + Wall St.</a>
+  <a href="#s4">Governance Gap</a>
+  <a href="#s5">B2B Invisibility</a>
+  <a href="#s6">Frontier Advantage</a>
+  <a href="#s7">Nadella's Warning</a>
+  <a href="#s8">GTM AI Reality</a>
+  <a href="#s9">Token Pay</a>
+  <a href="#s10">Microsoft Splits OpenAI</a>
+  <a href="#patterns">Patterns</a>
+  <a href="#ideas">Post Ideas</a>
+</nav>
+
+<!-- EDITOR'S NOTE -->
+<section class="editors-note">
+  <div class="editors-note-label">Editor's Note · May 9, 2026</div>
+  <h1>The Deployment War Has Begun.</h1>
+  <p>This week, something shifted. OpenAI and Anthropic both launched private-equity-backed enterprise ventures on the same day — a coordinated signal that the AI model wars are over and the <em>implementation wars</em> have started. The question is no longer which model is best. It's who gets embedded deepest inside the world's most important organizations.</p>
+  <p>Meanwhile, Microsoft published the most useful enterprise AI framework in months — the "Frontier Firm" blueprint — and new data confirms that 72% of enterprises have AI agents in production but only 12% have centralized governance. The gap between deployment and control is becoming the defining business risk of 2026.</p>
+  <p>For your work at Other Company: the next six months will be defined by which consulting firms, agencies, and advisors can credibly sit at the table during enterprise AI implementation. The window to position is now — before the Palantir-style FDE model becomes table stakes for every client conversation.</p>
+  <hr class="rule">
+  <p style="font-size:0.82rem;color:var(--mid-gray);font-style:italic;">⚡ = Urgent / directly actionable for you today</p>
+</section>
+<hr class="rule-bold" style="margin:0 5vw;">
+
+<!-- STORY 1: AI Consulting War -->
+<section id="s1" class="story-hero">
+  <div class="inner">
+    <div class="lightning-badge">⚡ Urgent</div>
+    <div class="date-stamp" style="color:#888;">May 4, 2026 · TechCrunch / Bloomberg / Fortune</div>
+    <div class="story-tag">Enterprise AI · Deal of the Year</div>
+    <h2>OpenAI and Anthropic Both Launched PE-Backed Consulting Ventures on the Same Day. This Is the War That Matters.</h2>
+    <p class="lead">On Monday May 4th, both companies announced separate private-equity-backed enterprise services businesses within hours of each other — a synchronized declaration that the next phase of AI isn't building better models, it's embedding engineers inside client operations.</p>
+    <p>OpenAI's vehicle, called The Deployment Company, raised $10 billion at a $10 billion valuation from TPG, Brookfield, Advent, and Bain Capital — with PE backers guaranteed a 17.5% annual return over five years. The model is unmistakably Palantir: forward-deployed engineers sitting inside enterprise clients, redesigning workflows from the inside. Anthropic's parallel venture is backed by Blackstone, Hellman & Friedman, and Goldman Sachs, with $1.5 billion committed. Both structures give PE investors preferred access to their portfolio companies as initial deployment targets.</p>
+    <p>This is the most consequential structural shift in enterprise tech since cloud migration. The AI model is now the commodity. The scarce resource — the thing both companies are spending billions to capture — is trusted implementation capacity inside large organizations. Every management consulting firm, systems integrator, and boutique AI advisory should read this as a starting gun.</p>
+    <div class="wtd-box">
+      <div class="wtd-label">What to do with this</div>
+      <ul>
+        <li data-icon="✍️">LinkedIn angle: "OpenAI and Anthropic didn't launch AI products this week. They launched consulting firms. The implementation wars have started — and the winners won't be the ones with the best models."</li>
+        <li data-icon="💼">Business implication: Other Company's positioning as an AI-native agency offering embedded GTM + implementation is more valuable than it was 72 hours ago. Lead with this in proposals.</li>
+        <li data-icon="🎯">GTM implication: Enterprise buyers are now being approached by model companies directly. Your angle: independent, model-agnostic implementation expertise that serves the client — not the model vendor.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 2: Microsoft Frontier Firm -->
+<section id="s2" class="story-dark">
+  <div class="inner">
+    <div class="date-stamp" style="color:#666;">May 5, 2026 · Microsoft Blog / Microsoft 365</div>
+    <div class="story-tag">Future of Work · Framework</div>
+    <h2>Microsoft Just Published the Best Enterprise AI Operating Model Anyone Has Written</h2>
+    <div>
+      <p>On May 5, Microsoft released "How Frontier Firms are rebuilding the operating model for the age of AI" — arguably the most strategically coherent framework for enterprise AI adoption published by any major tech company. It introduces four human-agent collaboration patterns that every knowledge worker will need to understand: <strong>Author, Editor, Director, Orchestrator</strong>.</p>
+      <p>The framework is grounded in real data: trillions of anonymized Microsoft 365 signals plus a 20,000-person survey across 10 countries. The core finding is both elegant and uncomfortable — the constraint on enterprise productivity is no longer what people can do, but how work is structured around them. 58% of AI users reported producing work they couldn't have done a year ago, rising to 80% among "Frontier Professionals."</p>
+      <p>The four roles map directly to maturity stages. Authors use AI occasionally. Editors hand off drafts. Directors delegate entire tasks. Orchestrators build multi-agent systems running in parallel. Most organizations are stuck between Author and Editor. The firms pulling away are building Director and Orchestrator capacity at scale.</p>
+    </div>
+    <div>
+      <div class="dark-stat">80%</div>
+      <div class="dark-stat-label">of Frontier Professionals produce work they couldn't have a year ago</div>
+      <br><br>
+      <div class="dark-stat">16×</div>
+      <div class="dark-stat-label">more agentic usage at frontier firms vs. typical firms</div>
+    </div>
+    <div class="wtd-box-purple">
+      <div class="wtd-label">What to do with this</div>
+      <ul>
+        <li data-icon="✍️">LinkedIn angle: Walk your audience through the four modes (Author → Orchestrator) with one real example from your own work at Reejig. Ask: "Which mode are you operating in?"</li>
+        <li data-icon="💼">Business implication: Use this framework as a diagnostic in client engagements. Where is your client on this spectrum? What would it take to move them from Editor to Director?</li>
+        <li data-icon="🎯">GTM implication: This is a content series. Four posts, one per role, each with a concrete workflow example. Positions you as the practitioner who's actually moved through all four.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 3: Anthropic + Wall Street -->
+<section id="s3" class="story-alert">
+  <div class="inner">
+    <div class="alert-stamp">⚡ Strategically Important</div>
+    <div class="date-stamp">May 5, 2026 · Fortune / Bloomberg / PYMNTS</div>
+    <div class="story-tag">Enterprise AI · Financial Services</div>
+    <h2>Anthropic Is Eating Wall Street's Grunt Work — and It's Already Inside JPMorgan, Goldman, Citi, and Visa</h2>
+    <div class="two-col">
+      <div>
+        <p>Alongside its PE venture announcement, Anthropic launched 10 pre-built Claude finance agent templates — covering pitchbook generation, KYC screening, earnings review, and month-end close — plus full Microsoft 365 integration that allows Claude to carry context simultaneously across Excel, PowerPoint, Word, and Outlook.</p>
+        <p>This is not a proof-of-concept play. Financial services is now Anthropic's second-largest source of enterprise revenue, right behind tech, with roughly 40% of its top 50 clients being financial firms. Claude Opus 4.7, its most capable financial reasoning model yet, launched alongside the agent suite.</p>
+      </div>
+      <div>
+        <div class="pull-quote-red">"Financial services now makes up Anthropic's second-biggest enterprise revenue source — right behind tech."</div>
+        <p>The Microsoft 365 integration is the piece most enterprise buyers haven't processed yet: Claude can now act as a single agent across the entire M365 stack, not just a chat window embedded in one app. For enterprise buyers already running on M365, this dramatically lowers the integration cost of deploying Claude at scale.</p>
+      </div>
+    </div>
+    <div class="wtd-box-red">
+      <div class="wtd-label">What to do with this</div>
+      <ul>
+        <li data-icon="✍️">LinkedIn angle: "Claude just became a cross-application agent across Excel, Word, PowerPoint, and Outlook simultaneously. For enterprise AI adoption, this is the unlock nobody is talking about."</li>
+        <li data-icon="💼">Business implication: The M365 integration makes Claude viable for any enterprise already in the Microsoft ecosystem — which is most of them. If clients are stalling on AI adoption "because of integration complexity," this removes that objection.</li>
+        <li data-icon="🎯">GTM implication: Revisit any enterprise prospect conversations stalled on "we're waiting for a cleaner AI stack." That stack is now here. The timing argument for delaying is gone.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 4: Governance Gap -->
+<section id="s4" class="story-terminal">
+  <div class="inner">
+    <div class="terminal-prompt"><span>$</span> query --source="AgenticAI Institute" --date="May 2026" --topic="governance"</div>
+    <br>
+    <div class="date-stamp" style="color:#50c07a;">May 2026 · Agentic AI Institute / McKinsey / TechHQ</div>
+    <div class="story-tag">Agentic AI · Enterprise Risk</div>
+    <h2>72% of Enterprises Run AI Agents in Production. Only 12% Have Centralized Control.</h2>
+    <div class="terminal-data">
+      <div class="terminal-data-item"><div class="num">72%</div><div class="lbl">in production with agentic AI</div></div>
+      <div class="terminal-data-item"><div class="num">43%</div><div class="lbl">have formal AI governance policy</div></div>
+      <div class="terminal-data-item"><div class="num">12%</div><div class="lbl">have centralized agent control</div></div>
+    </div>
+    <p>The governance gap is now the defining enterprise AI risk of 2026. Three in four enterprises have deployed AI agents — systems that take autonomous actions, trigger workflows, and execute decisions without real-time human approval. Yet only 12% have anything resembling centralized visibility into what those agents are doing. This isn't an IT problem. It's a business continuity problem, a regulatory problem, and increasingly a competitive problem: when agent errors compound silently, the cost can be catastrophic before anyone notices.</p>
+    <p>McKinsey's State of AI Trust report frames it precisely: the maturity curve is running faster than governance infrastructure. Organizations are deploying agents to capture short-term efficiency gains while punting on the frameworks that would make those gains sustainable. The CIO's most urgent blind spot isn't which model to choose — it's who owns accountability when an agent does something wrong.</p>
+    <div class="wtd-box-terminal">
+      <div class="wtd-label">What to do with this</div>
+      <ul>
+        <li data-icon="✍️">LinkedIn angle: "97% of enterprises are running AI agents. 12% can see what they're doing. The governance debt being accumulated right now will be this generation's technical debt — except with legal and operational consequences."</li>
+        <li data-icon="💼">Business implication: Add "AI governance audit" as a service offering at Other Company. Organizations deploying agents without governance frameworks are a discoverable liability and a consulting opportunity.</li>
+        <li data-icon="🎯">GTM implication: This is the perfect webinar topic for CHROs, CIOs, and Chief Risk Officers — the audience Reejig cares about. Position it as: "What to do when your agents outrun your governance."</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 5: B2B Invisibility -->
+<section id="s5" class="story-academic">
+  <div class="inner">
+    <div class="story-tag">Marketing · GEO · Demand Generation</div>
+    <div class="date-stamp">May 2026 · DerivateX / Demand Gen Report / Informa TechTarget</div>
+    <h2>Nearly Half of B2B SaaS Companies Are Invisible to the Buyers Who Matter Most</h2>
+    <p class="drop-cap">The DerivateX State of AI Visibility in B2B SaaS: 2026 Benchmark Report analyzed 50 B2B SaaS companies across 1,400 buyer-intent prompts run through ChatGPT, Perplexity, Claude, and Gemini. The finding is stark: the average AI Presence Score is 56.9 out of 100, and 44% of companies score below 50 — meaning they are functionally invisible to buyers who use AI platforms for vendor research. In the technology sector specifically, 80% of buyers now use generative AI as much as or more than traditional search.</p>
+    <p class="clear">This is not a marginal shift. Buyers no longer visit your website first. They open ChatGPT or Perplexity, ask "what's the best [category] tool for [use case]," and make a shortlist before your SEO rankings ever have a chance to matter. Generative Engine Optimization (GEO) — optimizing for inclusion in AI-generated answers, not just search rankings — is the new demand generation discipline no one in the C-suite has fully budgeted for yet.</p>
+    <p>The mechanics are specific: AI systems cite sources that demonstrate clear authority, use structured data, provide precise product definitions, and are named consistently across the web. Vague positioning, jargon-heavy copy, and thin content that confuses language models will render you invisible. Meanwhile, Informa TechTarget just launched a commercial GEO solution, which means the category is about to be industrialized.</p>
+    <div class="footnote-box">
+      <p>¹ DerivateX AI Visibility Benchmark, Q1 2026. 50 B2B SaaS companies, 1,400 buyer-intent prompts, ChatGPT / Perplexity / Claude / Gemini.</p>
+      <p>² Informa TechTarget GEO Content Solutions launched March 2026 for zero-click B2B buyer journeys.</p>
+    </div>
+    <div class="wtd-box-blue">
+      <div class="wtd-label">What to do with this</div>
+      <ul>
+        <li data-icon="✍️">LinkedIn angle: "Most B2B SaaS companies are invisible to buyers using AI to research vendors. GEO is replacing SEO at the top of the funnel. Here's what actually gets you cited."</li>
+        <li data-icon="💼">Business implication: Run a GEO audit on Reejig and Other Company. Test what ChatGPT and Perplexity say when asked about your category. If you're not named, you need to fix your content architecture before you spend another dollar on paid media.</li>
+        <li data-icon="🎯">GTM implication: Offer GEO audit + strategy as a service. This is a 2026 problem that most marketing leaders know exists but don't know how to solve. Your early mover positioning is high-value.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 6: Frontier Advantage -->
+<section id="s6" class="story-bigstat">
+  <div class="inner">
+    <div class="big-stat-number">
+      3.5×
+      <span>3.5×</span>
+    </div>
+    <div>
+      <div class="date-stamp" style="color:rgba(255,255,255,0.45);">May 2026 · OpenAI B2B Signals Report</div>
+      <div class="story-tag">Enterprise AI · Competitive Intelligence</div>
+      <h2>The Gap Between Frontier AI Firms and Everyone Else Is Now Compounding — Fast</h2>
+      <p>OpenAI's B2B Signals report reveals something that should unsettle every enterprise exec still doing "AI pilots": frontier firms — the 95th percentile of AI usage — now consume 3.5× more AI intelligence per worker than typical firms. A year ago, that gap was 2×. The compounding dynamic is real and accelerating.</p>
+      <p>More striking: usage volume explains only 36% of the frontier advantage. The other 64% comes from depth and complexity of use — richer context provided to AI, more sophisticated outputs requested, more autonomous workflows delegated. Frontier firms aren't just using more AI; they're using it differently. They're building toward Director and Orchestrator modes while the median firm is still copying and pasting outputs from a chat window.</p>
+      <p>The agentic signal is sharpest: frontier firms send 16× as many Codex messages per worker as typical firms. Autonomous, delegated work — not conversational AI — is where the real advantage is compounding.</p>
+    </div>
+    <div class="wtd-box-navy">
+      <div class="wtd-label">What to do with this</div>
+      <ul>
+        <li data-icon="✍️">LinkedIn angle: "The AI advantage is compounding. Frontier firms use 3.5x more AI per worker than typical firms — and the gap doubled in a year. The question is no longer whether to adopt AI. It's how fast you're falling behind."</li>
+        <li data-icon="💼">Business implication: Use this data in new business conversations. The urgency argument is now empirical, not theoretical. A year of delay is a measurable competitive disadvantage.</li>
+        <li data-icon="🎯">GTM implication: Build a "Frontier Firm Diagnostic" for prospective clients — a 10-question audit of where they sit on the usage depth spectrum. Use it as a lead-gen asset and consultative entry point.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 7: Nadella Warning -->
+<section id="s7" class="story-editorial">
+  <div class="inner">
+    <div class="date-stamp">May 2026 · Tom's Hardware / TechRadar / Business Standard</div>
+    <div class="story-tag">Leadership · AI Strategy · Market Risk</div>
+    <h2>Satya Nadella Says AI Is One Bad Quarter of Results Away From Losing Its Social License</h2>
+    <div class="editorial-grid">
+      <div>
+        <p>In an extended WEF interview, Microsoft's CEO delivered what amounts to an ultimatum to the AI industry: demonstrate measurable, broadly distributed benefits — across health, education, public sector efficiency, and business competitiveness — or risk losing the political and social permission to burn the energy required to run AI infrastructure at scale.</p>
+        <p>The bubble framing is deliberate. Nadella said a tell-tale sign of whether AI is a bubble would be if "all we're talking about are the tech firms." He's confident it won't be — but the condition he's setting is rigorous: AI must bend the productivity curve for businesses of all sizes, not just the megacaps with hundred-million-dollar compute budgets.</p>
+        <p>What Nadella is really warning about is the legitimacy crisis that would follow a period of massive AI investment with no visible societal payoff. And buried in his remarks is a more precise argument about enterprise sovereignty: firms that don't control the models trained on their proprietary knowledge are, in his framing, "leaking enterprise value to some model company somewhere." This should be heard as both a competitive observation and a product pitch — but the strategic insight is sound.</p>
+      </div>
+      <div class="sidebar-quote">
+        <blockquote>"We will quickly lose the social permission to take something like energy and use it to generate tokens, if those tokens are not improving health outcomes, education outcomes, and private sector competitiveness."</blockquote>
+        <cite>— Satya Nadella, Microsoft CEO · WEF 2026</cite>
+      </div>
+      <div class="wtd-box-green" style="grid-column:1/-1;">
+        <div class="wtd-label">What to do with this</div>
+        <ul>
+          <li data-icon="✍️">LinkedIn angle: "Satya Nadella just set the terms of AI's legitimacy test. Results, distributed broadly, within the next 18 months — or the social permission to burn energy on tokens evaporates. Here's why that changes your AI strategy."</li>
+          <li data-icon="💼">Business implication: The pressure to show measurable ROI from AI investments is not just internal — it's becoming a social and regulatory expectation. Client advisory should now include explicit ROI documentation frameworks, not just capability demonstrations.</li>
+          <li data-icon="🎯">GTM implication: "Enterprise AI ROI" is the content category that will dominate the next 12 months. Own it early with case studies, measurement frameworks, and point-of-view content.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 8: GTM AI Reality -->
+<section id="s8" class="story-dashboard">
+  <div class="inner">
+    <div class="date-stamp" style="color:rgba(74,143,255,0.6);">May 2026 · GTM Strategist / Demand Gen Report / B2BMX</div>
+    <div class="story-tag">GTM Strategy · AI Adoption · Marketing Operations</div>
+    <h2>The 2026 State of AI for GTM: What's Working Is Not What Anyone Expected</h2>
+    <div class="dashboard-metrics">
+      <div class="metric-card"><div class="m-num">89%</div><div class="m-label">of B2B procurement cycles now involve AI research</div></div>
+      <div class="metric-card"><div class="m-num">75%</div><div class="m-label">of buyers prefer a rep-free experience (Gartner)</div></div>
+      <div class="metric-card"><div class="m-num">45%</div><div class="m-label">less likely to engage vendors with synthetic-feeling outreach</div></div>
+      <div class="metric-card"><div class="m-num">150%</div><div class="m-label">engagement lift from AI-powered account personalization</div></div>
+    </div>
+    <p>The 2026 State of AI for GTM from GTM Strategist surfaces a paradox that should re-orient how AI is deployed in go-to-market: the organizations seeing the greatest gains are using AI to <em>enhance</em> human judgment, not replace it. Meanwhile, companies automating outreach at volume with AI are actively destroying their pipeline — 45% of buyers report being less likely to engage with a vendor if the initial outreach feels synthetic.</p>
+    <p>The most mature GTM organizations are using AI for three things and three things only: pattern recognition across intent data, real-time personalization of content and offers, and back-office efficiency that frees seller time for genuine relationship-building. Everything else — AI-generated cold email blasts, fully automated SDR sequences, synthetic social engagement — is generating noise while eroding brand trust. The B2BMX 2026 attendees called it the "AI trap": deploying AI where it's visible and cheap rather than where it's effective and defensible.</p>
+    <div class="wtd-box-dash">
+      <div class="wtd-label">What to do with this</div>
+      <ul>
+        <li data-icon="✍️">LinkedIn angle: "Everyone is using AI in GTM. The companies winning are the ones using it invisibly — for pattern recognition, not outreach automation. Here's where AI actually compounds your pipeline."</li>
+        <li data-icon="💼">Business implication: Reejig's positioning around "redesigning work for the AI era" needs to include a GTM capability story. This data gives you the empirical grounding to say: AI in GTM works, but not where most teams are deploying it.</li>
+        <li data-icon="🎯">GTM implication: Audit your own outreach stack. If any touchpoint feels synthetic to the recipient, the data says it's costing you deals. Human-authored, AI-assisted is the winning formula — not AI-authored, human-reviewed.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 9: Token Pay -->
+<section id="s9" class="story-newspaper">
+  <div class="inner">
+    <div class="newspaper-header">
+      <div class="story-tag">Executive Strategy · Future of Work · Compensation</div>
+      <h2>Jensen Huang Wants to Pay Engineers in <em>AI Tokens.</em> He's Not Wrong.</h2>
+    </div>
+    <div class="newspaper-cols">
+      <div class="inset-stat">
+        <div class="big">$250K</div>
+        <div class="sm">Minimum token spend per senior engineer, per year — per Huang</div>
+      </div>
+      <p>At GTC 2026, Nvidia CEO Jensen Huang floated a compensation model that should be taken seriously even though it sounds absurd: engineers should receive a token budget worth roughly half their base salary annually. For a $500,000-a-year software engineer, that means $250,000 in AI token access — not as a perk, but as a performance requirement. Engineers not using that token budget aren't operating at full capacity, Huang argued. It's equivalent to designing chips with paper and pencil.</p>
+      <p>The logic extends well beyond Nvidia. Huang predicts that "every single enterprise software company will also be a value-added reseller" of AI tokens from Anthropic, OpenAI, and others — what he calls a "logarithmic expansion" of their go-to-market. Token allocation, he believes, will become a standard recruiting tool within 18 months. The early signals are already visible in Silicon Valley, where access to premium AI infrastructure is explicitly listed in senior engineering job postings.</p>
+      <p>The deeper implication is organizational. If tokens are the new compute, and compute access determines productivity, then access to AI infrastructure becomes a stratifying variable inside organizations — not just between companies. Teams with generous token budgets will compound productivity advantages over teams rationing access, just as broadband access once divided knowledge workers from their peers.</p>
+    </div>
+    <div class="wtd-box-newsprint">
+      <div class="wtd-label">What to do with this</div>
+      <ul>
+        <li data-icon="✍️">LinkedIn angle: "Jensen Huang wants to pay engineers in AI tokens. The idea sounds wild. The logic is airtight. Here's why token budgets will be the new performance benchmark for knowledge workers by 2027."</li>
+        <li data-icon="💼">Business implication: "AI budget per employee" is a KPI that doesn't exist in most organizations' planning frameworks yet. Helping clients build this metric — and argue for it internally — is a consultative value-add with a clear ROI story.</li>
+        <li data-icon="🎯">GTM implication: Future of Work narrative opportunity. Position Reejig at the intersection of workforce redesign and AI resource allocation. The conversation is moving from "should we use AI" to "how much AI are we giving each role?"</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 10: Microsoft OpenAI Split -->
+<section id="s10" class="story-swiss">
+  <div class="inner">
+    <div class="swiss-header">
+      <div class="swiss-big-num">10</div>
+      <div>
+        <div class="story-tag">Platform Strategy · Competitive Dynamics</div>
+        <div class="date-stamp">April 27 – May 4, 2026 · Microsoft Blog / CNBC / The Register</div>
+        <h2>Microsoft and OpenAI Rewrote Their Marriage Contract. The Implications Run Deep.</h2>
+      </div>
+    </div>
+    <div class="swiss-body">
+      <div>
+        <p>The amended Microsoft-OpenAI partnership — announced April 27 and finalized in early May — fundamentally changes the competitive map. OpenAI can now serve any cloud provider, not just Azure, while Microsoft retains a license to OpenAI IP through 2032 and revenue-share payments continue through 2030, subject to a total cap. The exclusivity era is over.</p>
+        <p>What does this mean in practice? OpenAI is now free to build direct relationships with enterprises running on AWS, Google Cloud, or their own infrastructure — which is most of the Fortune 500 that isn't already on Azure. This dramatically expands OpenAI's addressable market while forcing Microsoft to compete on Copilot value rather than distribution advantage. For enterprise buyers, the leverage calculation shifts: you no longer need to be an Azure shop to get OpenAI's best models at the best prices.</p>
+        <p>The timing of OpenAI's "Deployment Company" announcement four days after the partnership restructure is almost certainly not coincidental. Having secured cloud flexibility, OpenAI immediately moved to secure implementation channels — the same channels Microsoft was implicitly providing by bundling Copilot into M365 licenses. This is a methodical, multi-move strategic sequence.</p>
+      </div>
+      <div class="swiss-highlight">
+        The exclusivity era between OpenAI and Microsoft is over. <strong>OpenAI can now go directly to any enterprise, on any cloud.</strong> This is the most important platform shift in enterprise AI since Azure signed the original deal in 2019.
+      </div>
+      <div class="wtd-box-gold" style="grid-column:1/-1;">
+        <div class="wtd-label">What to do with this</div>
+        <ul>
+          <li data-icon="✍️">LinkedIn angle: "Microsoft and OpenAI officially ended their exclusivity this week. Now OpenAI can go to any enterprise, on any cloud. Here's what that means for every enterprise AI strategy being written right now."</li>
+          <li data-icon="💼">Business implication: Enterprise AI stack decisions just became more open. Clients locked into Azure procurement paths for AI access now have negotiating leverage they didn't have two weeks ago.</li>
+          <li data-icon="🎯">GTM implication: The "which model, which cloud" conversation is now genuinely multi-vendor in a way it wasn't before. Position model-agnostic implementation expertise as a competitive advantage for clients navigating this fragmentation.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PATTERNS EMERGING -->
+<section id="patterns" class="patterns-section">
+  <div class="inner">
+    <div class="section-label">Patterns Emerging</div>
+    <h2>Three Signals Repeating Across Every Story Today</h2>
+    <div class="pattern-grid">
+      <div class="pattern-card">
+        <div class="pattern-num">Pattern 01</div>
+        <h3>The Implementation Layer Is Now the Prize</h3>
+        <p>Every major story this week — OpenAI's Deployment Company, Anthropic's PE venture, Microsoft's Frontier Firm framework — points to the same conclusion: model capability is commoditizing. The valuable real estate is deep inside enterprise operations. Whoever controls implementation controls the relationship.</p>
+      </div>
+      <div class="pattern-card">
+        <div class="pattern-num">Pattern 02</div>
+        <h3>Governance Debt Is Accumulating Faster Than Anyone Admits</h3>
+        <p>72% in production. 12% with centralized control. 43% with formal policy. The gap between deployment velocity and governance maturity is the defining enterprise risk of 2026 — and it's a category waiting for credible advisors who can translate "governance" from compliance-speak into operational reality.</p>
+      </div>
+      <div class="pattern-card">
+        <div class="pattern-num">Pattern 03</div>
+        <h3>AI Must Prove Its ROI — Or Lose Its Mandate</h3>
+        <p>Nadella's "social permission" warning, GTM buyers' fatigue with synthetic outreach, the B2B visibility crisis — all point to the same pressure: AI is moving from novelty to accountability. The next 12 months are about demonstrating measurable, attributable value. Organizations that can prove it will pull ahead; those that can't will face internal and external backlash.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDEAS TO POST -->
+<section id="ideas" class="ideas-section">
+  <div class="inner">
+    <div class="section-label">Ideas Worth Posting About Today</div>
+    <h2>3 LinkedIn Post Ideas from Today's News</h2>
+    <div class="idea-cards">
+      <div class="idea-card">
+        <div class="idea-num">01</div>
+        <h3>The Implementation Wars Have Started</h3>
+        <p>OpenAI and Anthropic both launched Palantir-style consulting ventures on the same day. The framing: this isn't about AI models anymore — it's about who gets embedded deepest inside enterprise operations. Share your POV on what this means for the consulting and advisory market.</p>
+        <div class="idea-hook">"Two AI labs walked into consulting on the same day. Here's what the enterprise services market looks like now."</div>
+      </div>
+      <div class="idea-card">
+        <div class="idea-num">02</div>
+        <h3>The Author → Orchestrator Spectrum</h3>
+        <p>Use Microsoft's four-mode framework (Author, Editor, Director, Orchestrator) to show where most enterprise workers are sitting today vs. where frontier professionals operate. Make it concrete with a personal example from your Reejig or Other Company work.</p>
+        <div class="idea-hook">"Most people using AI at work are stuck in Author mode. Here's what moving to Orchestrator actually looks like."</div>
+      </div>
+      <div class="idea-card">
+        <div class="idea-num">03</div>
+        <h3>The GEO Blind Spot</h3>
+        <p>44% of B2B SaaS companies are invisible to AI-assisted buyers. Most marketing teams have a SEO strategy and zero GEO strategy. Walk through what GEO actually means, why it matters for demand gen, and the three things that determine whether you get cited by ChatGPT or ignored.</p>
+        <div class="idea-hook">"Your buyers are asking ChatGPT who to buy from. Is your company in the answer?"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="mag-footer">
+  <span>Morning Edition · May 9, 2026</span>
+  <span>Built for Jeff Mack · Other Company</span>
+  <span>AI · Marketing · Enterprise · Future of Work</span>
+</footer>
+
+<script>
+  // Smooth hover fade on story sections
+  document.querySelectorAll('.story-hero .inner, .story-dark .inner, .story-bigstat .inner, .story-dashboard .inner').forEach(el => {
+    el.parentElement.addEventListener('mouseenter', () => el.style.opacity = '1');
+  });
+</script>
+</body>
+</html>
