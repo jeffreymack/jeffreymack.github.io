@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Edition — May 19, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --cream: #faf8f3;
+    --red: #c8392b;
+    --gold: #c9a84c;
+    --blue: #1a3a5c;
+    --teal: #0a3a3a;
+    --green: #1a4a2e;
+    --orange: #b84c1a;
+    --purple: #3d1a5c;
+    --silver: #8a8a8a;
+    --rule: #d4cfc5;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2rem 4rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 4px solid var(--gold);
+  }
+  .masthead-left .edition-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .masthead-left h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+  .masthead-right { text-align: right; }
+  .masthead-right .date {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--gold);
+  }
+  .masthead-right .tagline {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888;
+    margin-top: 0.3rem;
+  }
+  .masthead-right .live-badge {
+    display: inline-block;
+    background: #c8392b;
+    color: white;
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    margin-top: 0.5rem;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+  /* ── NAV ── */
+  .nav-bar {
+    background: var(--ink);
+    border-bottom: 1px solid #222;
+    padding: 0 4rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-bar::-webkit-scrollbar { display: none; }
+  .nav-bar a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.8rem 1rem;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-bar a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+  .nav-bar a.live { color: #ff4444; }
+  .nav-bar a.alert { color: #f59e0b; }
+
+  /* ── SHARED ── */
+  .story-meta {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin-bottom: 0.6rem;
+  }
+  .story-meta .source { color: var(--gold); }
+  .story-body p { margin-bottom: 1rem; font-size: 0.92rem; line-height: 1.78; color: #333; }
+  .story-body p:last-child { margin-bottom: 0; }
+  .wtd { margin-top: 1.5rem; border-top: 1px solid currentColor; padding-top: 1rem; opacity: 0.85; }
+  .wtd-label { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.7rem; }
+  .wtd-items { display: flex; flex-direction: column; gap: 0.5rem; }
+  .wtd-item { font-size: 0.78rem; line-height: 1.55; }
+  .wtd-item strong { font-weight: 700; margin-right: 0.35rem; }
+  .alert-badge {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    margin-bottom: 0.8rem;
+  }
+
+  /* ══════════════════════════════════════════
+     STORY TREATMENTS
+  ══════════════════════════════════════════ */
+
+  /* ─── S1: LIVE BREAKING / DIAGONAL SPLIT ─── */
+  #s1.live-story {
+    background: #020a18;
+    color: #e0eaff;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    min-height: 500px;
+  }
+  #s1 .live-bg-text {
+    position: absolute;
+    top: -3rem;
+    right: -3rem;
+    font-family: 'Fraunces', serif;
+    font-size: 18rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.025);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  #s1 .live-inner {
+    position: relative;
+    z-index: 2;
+    padding: 5rem 4rem;
+    max-width: 1000px;
+  }
+  #s1 .live-ticker {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+  #s1 .live-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #ff4444;
+    animation: pulse 1.5s infinite;
+  }
+  #s1 .live-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #ff4444;
+  }
+  #s1 .live-headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  #s1 .live-deck {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(224,234,255,0.7);
+    max-width: 680px;
+    line-height: 1.65;
+    margin-bottom: 2rem;
+    border-left: 3px solid #4a7aff;
+    padding-left: 1.2rem;
+  }
+  #s1 .announcement-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    margin: 2rem 0;
+  }
+  #s1 .ann-cell {
+    background: rgba(2,10,24,0.95);
+    padding: 1.2rem 1rem;
+  }
+  #s1 .ann-cell .title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #4a7aff;
+    margin-bottom: 0.4rem;
+  }
+  #s1 .ann-cell .desc { font-size: 0.82rem; color: rgba(224,234,255,0.65); line-height: 1.5; }
+  #s1 .story-body p { color: rgba(224,234,255,0.7); }
+  #s1 .wtd { border-color: rgba(255,255,255,0.12); }
+  #s1 .wtd-label { color: #4a7aff; }
+  #s1 .wtd-item { color: rgba(224,234,255,0.65); }
+
+  /* ─── S2: TRIPLE-SCOOP ANTHROPIC / GOLD ON BLACK ─── */
+  #s2.triple-story {
+    background: #0c0800;
+    color: #f5e8c0;
+    padding: 5rem 4rem;
+    border-bottom: 1px solid #2a2000;
+  }
+  #s2 .triple-inner { max-width: 1100px; margin: 0 auto; }
+  #s2 .triple-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+  #s2 .triple-headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.2rem, 4.5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  #s2 .triple-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #2a2000;
+    border: 1px solid #2a2000;
+    margin: 2rem 0;
+  }
+  #s2 .triple-card {
+    background: #0c0800;
+    padding: 1.8rem;
+  }
+  #s2 .triple-card .label {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    opacity: 0.7;
+  }
+  #s2 .triple-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 0.6rem;
+  }
+  #s2 .triple-card p { font-size: 0.8rem; color: rgba(245,232,192,0.55); line-height: 1.6; }
+  #s2 .triple-card .stat { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 900; color: var(--gold); line-height: 1; margin: 0.8rem 0 0.3rem; }
+  #s2 .story-body p { color: rgba(245,232,192,0.7); }
+  #s2 .wtd { border-color: #2a2000; }
+  #s2 .wtd-label { color: var(--gold); }
+  #s2 .wtd-item { color: rgba(245,232,192,0.65); }
+
+  /* ─── S3: SWISS TEAL GRID ─── */
+  #s3.teal-story {
+    background: var(--teal);
+    color: #d4ede8;
+    padding: 5rem 4rem;
+    border-bottom: 1px solid #0f4a3a;
+  }
+  #s3 .teal-inner {
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  #s3 .teal-num {
+    font-family: 'Fraunces', serif;
+    font-size: 9rem;
+    font-weight: 900;
+    line-height: 0.85;
+    color: rgba(255,255,255,0.06);
+    margin-bottom: 0.5rem;
+  }
+  #s3 .teal-headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  #s3 .story-body p { color: rgba(212,237,232,0.7); }
+  #s3 .tier-table {
+    border: 1px solid rgba(255,255,255,0.12);
+    margin: 1.5rem 0;
+  }
+  #s3 .tier-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  #s3 .tier-row:last-child { border-bottom: none; }
+  #s3 .tier-name {
+    background: rgba(255,255,255,0.05);
+    padding: 0.8rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7fffd4;
+  }
+  #s3 .tier-desc { padding: 0.8rem 1rem; font-size: 0.78rem; color: rgba(212,237,232,0.6); }
+  #s3 .pull-quote {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.35;
+    color: #7fffd4;
+    border-left: 3px solid #7fffd4;
+    padding-left: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  #s3 .wtd { border-color: rgba(255,255,255,0.15); }
+  #s3 .wtd-label { color: #7fffd4; }
+  #s3 .wtd-item { color: rgba(212,237,232,0.65); }
+
+  /* ─── S4: MONEY / DEEP RED ─── */
+  #s4.money-story {
+    background: var(--paper);
+    padding: 5rem 4rem;
+    border-left: 8px solid var(--orange);
+    border-bottom: 1px solid var(--rule);
+  }
+  #s4 .money-inner { max-width: 1100px; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  #s4 .money-headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--orange);
+    margin-bottom: 1rem;
+  }
+  #s4 .big-arro {
+    font-family: 'Fraunces', serif;
+    font-size: 7rem;
+    font-weight: 900;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  #s4 .big-arro-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--silver); }
+  #s4 .stat-stack { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1.5rem; }
+  #s4 .stat-item { border-top: 1px solid var(--rule); padding-top: 1rem; }
+  #s4 .stat-item .n { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 900; color: var(--orange); line-height: 1; }
+  #s4 .stat-item .d { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--silver); margin-top: 0.2rem; }
+  #s4 .wtd { border-color: var(--rule); }
+  #s4 .wtd-label { color: var(--orange); }
+
+  /* ─── S5: HACKER / TERMINAL (AGENT WASHING) ─── */
+  #s5.glitch-story {
+    background: #060606;
+    color: #f0f0f0;
+    padding: 5rem 4rem;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid #111;
+  }
+  #s5 .glitch-inner { max-width: 900px; position: relative; z-index: 1; }
+  #s5 .glitch-eyebrow {
+    font-size: 0.7rem;
+    color: #ff3a3a;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  #s5 .glitch-headline {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(1.4rem, 3vw, 2.3rem);
+    font-weight: 700;
+    color: #ff3a3a;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 0 #ff000044;
+  }
+  #s5 .fraud-meter {
+    margin: 2rem 0;
+    border: 1px solid #ff3a3a33;
+    padding: 1.5rem;
+  }
+  #s5 .fraud-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+  }
+  #s5 .fraud-bar-track {
+    height: 24px;
+    background: #111;
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
+  }
+  #s5 .fraud-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff3a3a, #ff6a3a);
+    width: 95%;
+    position: relative;
+  }
+  #s5 .fraud-bar-real {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 5%;
+    height: 100%;
+    background: #00ff41;
+  }
+  #s5 .fraud-legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.6rem;
+    font-size: 0.62rem;
+    color: #666;
+  }
+  #s5 .story-body p { color: #aaa; font-family: 'Courier New', monospace; font-size: 0.85rem; }
+  #s5 .wtd { border-color: #ff3a3a33; }
+  #s5 .wtd-label { color: #ff3a3a; }
+  #s5 .wtd-item { color: #aaa; font-family: 'Courier New', monospace; font-size: 0.78rem; }
+
+  /* ─── S6: BANK / AUTHORITY (JPMORGAN) ─── */
+  #s6.bank-story {
+    background: #f9f7f2;
+    padding: 5rem 4rem;
+    border-top: 6px solid #1a1a3a;
+    border-bottom: 1px solid var(--rule);
+  }
+  #s6 .bank-inner { max-width: 900px; margin: 0 auto; }
+  #s6 .bank-headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #1a1a3a;
+    margin-bottom: 1.2rem;
+  }
+  #s6 .story-body p:first-child::first-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 0.75;
+    float: left;
+    margin-right: 0.15em;
+    margin-top: 0.1em;
+    color: #1a1a3a;
+  }
+  #s6 .bank-stats {
+    display: flex;
+    gap: 0;
+    border: 2px solid #1a1a3a;
+    margin: 2rem 0;
+  }
+  #s6 .bank-stat {
+    flex: 1;
+    padding: 1.5rem;
+    border-right: 1px solid #1a1a3a;
+    text-align: center;
+  }
+  #s6 .bank-stat:last-child { border-right: none; }
+  #s6 .bank-stat .n { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 900; color: #1a1a3a; line-height: 1; }
+  #s6 .bank-stat .d { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #888; margin-top: 0.3rem; }
+  #s6 .wtd { border-color: var(--rule); }
+  #s6 .wtd-label { color: #1a1a3a; }
+
+  /* ─── S7: PRODUCT / GOOGLEBOOK ─── */
+  #s7.product-story {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #e0e8ff;
+    padding: 5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #s7.product-story::before {
+    content: 'G';
+    position: absolute;
+    right: -4rem;
+    bottom: -5rem;
+    font-family: 'Fraunces', serif;
+    font-size: 30rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    pointer-events: none;
+  }
+  #s7 .product-inner { max-width: 900px; position: relative; z-index: 1; }
+  #s7 .product-category {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #6af4ff;
+    margin-bottom: 0.8rem;
+  }
+  #s7 .product-headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  #s7 .feature-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+  }
+  #s7 .pill {
+    background: rgba(106,244,255,0.1);
+    border: 1px solid rgba(106,244,255,0.3);
+    color: #6af4ff;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+  }
+  #s7 .story-body p { color: rgba(224,232,255,0.7); }
+  #s7 .wtd { border-color: rgba(106,244,255,0.2); }
+  #s7 .wtd-label { color: #6af4ff; }
+  #s7 .wtd-item { color: rgba(224,232,255,0.65); }
+
+  /* ─── S8: EDITORIAL TWO-COL (SALESFORCE) ─── */
+  #s8.editorial-story {
+    background: var(--cream);
+    padding: 5rem 4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  #s8 .editorial-inner { max-width: 1100px; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
+  #s8 .editorial-headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+  }
+  #s8 .sidebar-quote {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    line-height: 1.4;
+    border-top: 3px solid var(--gold);
+    padding-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  #s8 .sidebar-stat {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  #s8 .sidebar-stat .n { font-family: 'Fraunces', serif; font-size: 2.8rem; font-weight: 900; color: var(--gold); line-height: 1; }
+  #s8 .sidebar-stat .d { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #aaa; margin-top: 0.4rem; }
+  #s8 .wtd { border-color: var(--rule); }
+  #s8 .wtd-label { color: var(--silver); }
+
+  /* ─── S9: NIGHT PURPLE (ANTHROPIC COMPUTE) ─── */
+  #s9.compute-story {
+    background: #0a0510;
+    color: #e0d0ff;
+    padding: 5rem 4rem;
+    border-bottom: 1px solid #150a20;
+    position: relative;
+    overflow: hidden;
+  }
+  #s9.compute-story::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 20% 80%, rgba(90,30,150,0.35) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  #s9 .compute-inner { max-width: 900px; position: relative; z-index: 1; }
+  #s9 .compute-headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  #s9 .compute-deck {
+    font-size: 1rem;
+    color: #c0a0ff;
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+    margin-bottom: 2rem;
+    border-left: 3px solid #8050ff;
+    padding-left: 1.2rem;
+  }
+  #s9 .partner-row {
+    display: flex;
+    gap: 1px;
+    background: #2a1040;
+    border: 1px solid #2a1040;
+    margin: 2rem 0;
+  }
+  #s9 .partner-cell {
+    background: #0a0510;
+    flex: 1;
+    padding: 1.2rem;
+    text-align: center;
+  }
+  #s9 .partner-cell .name { font-size: 1rem; font-weight: 700; color: #c0a0ff; margin-bottom: 0.3rem; }
+  #s9 .partner-cell .role { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: #5a3a7a; }
+  #s9 .story-body p { color: rgba(224,208,255,0.68); }
+  #s9 .wtd { border-color: #2a1040; }
+  #s9 .wtd-label { color: #c0a0ff; }
+  #s9 .wtd-item { color: rgba(224,208,255,0.65); }
+
+  /* ─── S10: NEWSPAPER / COPILOT ─── */
+  #s10.news-story {
+    background: #f9f7f0;
+    padding: 5rem 4rem;
+    border-top: 5px double var(--ink);
+    border-bottom: 5px double var(--ink);
+  }
+  #s10 .news-inner { max-width: 1000px; margin: 0 auto; }
+  #s10 .news-kicker {
+    text-align: center;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin-bottom: 0.8rem;
+  }
+  #s10 .news-headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3.6rem);
+    font-weight: 900;
+    line-height: 1.05;
+    text-align: center;
+    padding-bottom: 1.2rem;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  #s10 .news-byline {
+    text-align: center;
+    font-size: 0.65rem;
+    color: var(--silver);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  #s10 .news-columns { column-count: 2; column-gap: 3rem; column-rule: 1px solid var(--rule); }
+  #s10 .story-body p { font-size: 0.88rem; }
+  #s10 .news-pullquote {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    margin: 1rem 0;
+    break-inside: avoid;
+  }
+  #s10 .wtd { column-span: all; border-color: var(--rule); }
+  #s10 .wtd-label { color: var(--silver); }
+
+  /* ── EDITOR'S NOTE ── */
+  .editors-note {
+    background: var(--cream);
+    padding: 3rem 4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .editors-note-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .editors-note-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--silver);
+    padding-top: 0.5rem;
+  }
+  .editors-note h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .editors-note p { font-size: 0.9rem; color: #444; line-height: 1.75; margin-bottom: 0.8rem; }
+  .theme-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .theme-tag { background: var(--ink); color: var(--paper); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.25rem 0.7rem; }
+
+  /* ── PATTERNS ── */
+  .patterns-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5rem 4rem;
+  }
+  .patterns-inner { max-width: 1100px; margin: 0 auto; }
+  .patterns-section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 0.4rem;
+    color: var(--gold);
+  }
+  .patterns-section .sub { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #555; margin-bottom: 3rem; }
+  .patterns-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .pattern-card { border-top: 2px solid var(--gold); padding-top: 1.2rem; }
+  .pattern-card h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.7rem; line-height: 1.2; }
+  .pattern-card p { font-size: 0.82rem; color: #888; line-height: 1.65; }
+
+  /* ── POST IDEAS ── */
+  .post-ideas-section {
+    background: var(--gold);
+    padding: 4rem;
+    border-bottom: 1px solid #b8962a;
+  }
+  .post-ideas-inner { max-width: 1100px; margin: 0 auto; }
+  .post-ideas-section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .post-ideas-section .sub { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(10,10,10,0.5); margin-bottom: 2.5rem; }
+  .post-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .post-card {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2rem;
+    transition: transform 0.2s;
+  }
+  .post-card:hover { transform: translateY(-3px); }
+  .post-card .num { font-family: 'Fraunces', serif; font-size: 3rem; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 1rem; }
+  .post-card h3 { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.7rem; }
+  .post-card p { font-size: 0.8rem; color: #aaa; line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #050505;
+    color: #444;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .footer .logo { font-family: 'Fraunces', serif; font-size: 1rem; color: #333; font-weight: 700; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .masthead, .editors-note, #s1 .live-inner, #s2 .triple-inner, #s3 .teal-inner,
+    #s4 .money-inner, #s5 .glitch-inner, #s6 .bank-inner, #s7 .product-inner,
+    #s8 .editorial-inner, #s9 .compute-inner, #s10 .news-inner,
+    .patterns-section, .post-ideas-section, .footer { padding: 2rem 1.5rem; }
+    #s3 .teal-inner, #s4 .money-inner, #s8 .editorial-inner { grid-template-columns: 1fr; gap: 2rem; }
+    #s1 .announcement-grid, #s2 .triple-cards { grid-template-columns: 1fr; }
+    .patterns-grid, .post-cards { grid-template-columns: 1fr; }
+    #s10 .news-columns { column-count: 1; }
+    .editors-note-inner { grid-template-columns: 1fr; gap: 1rem; }
+    #s6 .bank-stats { flex-direction: column; }
+    #s9 .partner-row { flex-direction: column; }
+    .nav-bar { padding: 0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-left">
+    <div class="edition-label">Morning Edition</div>
+    <h1>Morning<br>Magazine</h1>
+  </div>
+  <div class="masthead-right">
+    <div class="date">Tuesday, May 19, 2026</div>
+    <div class="tagline">Intelligence for the AI-era operator</div>
+    <div class="live-badge">● Google I/O Live Today</div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a href="#editors-note">Editor's Note</a>
+  <a href="#s1" class="live">● Google I/O Live</a>
+  <a href="#s2" class="alert">⚡ Anthropic Blitz</a>
+  <a href="#s3">ServiceNow Tiers</a>
+  <a href="#s4">Salesforce $800M</a>
+  <a href="#s5">Agent Washing</a>
+  <a href="#s6">JPMorgan $19.8B</a>
+  <a href="#s7">The Googlebook</a>
+  <a href="#s8">SaaS Reckoning</a>
+  <a href="#s9">Anthropic Compute</a>
+  <a href="#s10">Copilot's Identity Crisis</a>
+  <a href="#patterns">Patterns</a>
+  <a href="#post-ideas">Post Ideas</a>
+</nav>
+
+<!-- EDITOR'S NOTE -->
+<section id="editors-note" class="editors-note">
+  <div class="editors-note-inner">
+    <div class="editors-note-label">Editor's Note<br>May 19, 2026</div>
+    <div>
+      <h2>Today is Google I/O. It also happens to be the day Anthropic, Salesforce, and ServiceNow all proved that enterprise AI is no longer a pilot program.</h2>
+      <p>Google I/O kicks off its keynote this morning — and the expectation is Gemini 4.0, a new agentic AI layer baked into Android, and the "Googlebook," a new hardware category designed from the ground up for AI. Meanwhile, Anthropic ran what may be its most consequential week ever: a PwC deal certifying 30,000 professionals, a $200M Gates Foundation health partnership, and a small business product launch. All in seven days.</p>
+      <p>The sharper signal is structural: the enterprise software vendors that move first to embed agentic AI at the commercial tier level — ServiceNow just did this, Salesforce already proved it — are building the moat. Everyone else is playing catch-up with a shrinking runway.</p>
+      <div class="theme-tags">
+        <span class="theme-tag">Google I/O</span>
+        <span class="theme-tag">Anthropic Expansion</span>
+        <span class="theme-tag">Agentic Enterprise</span>
+        <span class="theme-tag">Agent Washing</span>
+        <span class="theme-tag">Financial Infrastructure</span>
+        <span class="theme-tag">Compute Wars</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S1: GOOGLE I/O LIVE -->
+<article id="s1" class="live-story">
+  <div class="live-bg-text">I/O</div>
+  <div class="live-inner">
+    <div class="live-ticker">
+      <div class="live-dot"></div>
+      <span class="live-label">Live Today — Google I/O Keynote · May 19, 10AM PT</span>
+    </div>
+    <div class="story-meta" style="color: rgba(224,234,255,0.4);">
+      <span class="source">Google · Android Authority · TechRadar · Gizmodo</span> &nbsp;·&nbsp; May 19, 2026
+    </div>
+    <h2 class="live-headline">Google I/O 2026:<br>Gemini 4.0, Agentic Android,<br>and a New Hardware Category</h2>
+    <p class="live-deck">Google's developer conference starts this morning. The expectations: Gemini 4.0 with native text + image + video generation in a single pipeline, an agentic AI layer that takes actions across Android instead of just answering prompts, and the debut of the Googlebook — a laptop category designed from scratch for AI.</p>
+
+    <div class="announcement-grid">
+      <div class="ann-cell">
+        <div class="title">Gemini 4.0 + Omni</div>
+        <div class="desc">Unified model generating text, images, and video in a single pipeline. Replaces separate model tiers.</div>
+      </div>
+      <div class="ann-cell">
+        <div class="title">Agentic Android</div>
+        <div class="desc">Gemini embedded inside Android 17 with cross-app automation — books flights, fills carts, routes calls without user prompting.</div>
+      </div>
+      <div class="ann-cell">
+        <div class="title">Googlebook Hardware</div>
+        <div class="desc">New laptop category with Acer, ASUS, Dell, HP, Lenovo. Gemini baked into the cursor. Android app support. Ships fall 2026.</div>
+      </div>
+    </div>
+
+    <div class="story-body">
+      <p>The strategic read on Google I/O 2026 is not what Google announces — it's what it signals about where the enterprise AI interface is heading. Gemini embedded at the OS level, inside Chrome, and across Android is Google's version of Microsoft's Copilot thesis: the AI assistant should be ambient and invisible, not a tab you switch to. The question is whether enterprise buyers trust Google with that level of access to their workflows.</p>
+      <p>The Googlebook is the long shot worth watching. If Google can create a hardware category where Gemini Intelligence is the primary interface — not an app, but the operating paradigm — it would be the most significant enterprise hardware platform shift since the iPad failed to become a business device. The "Magic Pointer" that surfaces context-sensitive AI suggestions wherever your cursor is pointed is either the future of the desktop or a demo gimmick. We'll know more by 11AM.</p>
+      <p>For the enterprise AI ecosystem: every Gemini enterprise announcement today is a data point on how seriously Google is competing with Microsoft 365 Copilot and Salesforce Agentforce for the workflow automation layer. The company with the best AI in the OS wins the enterprise attention economy.</p>
+    </div>
+
+    <div class="wtd">
+      <div class="wtd-label">What To Do With This</div>
+      <div class="wtd-items">
+        <div class="wtd-item"><strong>LinkedIn:</strong> Live-reaction post to the I/O keynote this morning. Angle: "What Google announced today and what it actually means for enterprise AI buyers." First-mover content wins on event days.</div>
+        <div class="wtd-item"><strong>GTM:</strong> Every major AI keynote is a content creation trigger. Prepare a 3-point reaction framework before the keynote — takes 15 min to draft and makes post-event content fast and credible.</div>
+        <div class="wtd-item"><strong>Business:</strong> Watch specifically for Gemini for Workspace enterprise announcements. Any displacement of Microsoft 365 Copilot features is a market opportunity for independent GTM and AI advisors.</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- S2: ANTHROPIC THREE-WAY BLITZ -->
+<article id="s2" class="triple-story">
+  <div class="triple-inner">
+    <div class="triple-eyebrow">⚡ Urgent Signal · Anthropic's Most Consequential Week</div>
+    <div class="story-meta" style="color: rgba(245,232,192,0.4);">
+      <span class="source">Anthropic.com · PwC · Gates Foundation · Let's Data Science</span> &nbsp;·&nbsp; May 13–14, 2026
+    </div>
+    <h2 class="triple-headline">Anthropic Ran Three<br>Enterprise Plays in One Week.<br>None of Them Are Incidental.</h2>
+
+    <div class="triple-cards">
+      <div class="triple-card">
+        <div class="label">Partnership 01</div>
+        <h3>PwC Certifies 30,000 Professionals on Claude</h3>
+        <div class="stat">30k</div>
+        <p>PwC is deploying Claude Code and Cowork across its U.S. teams globally, establishing a joint Center of Excellence and certifying 30,000 professionals — the largest professional certification program tied to a single AI model to date.</p>
+      </div>
+      <div class="triple-card">
+        <div class="label">Partnership 02</div>
+        <h3>Gates Foundation: $200M for Global Health + Education</h3>
+        <div class="stat">$200M</div>
+        <p>Anthropic commits $200M in grant funding, Claude usage credits, and technical support to the Gates Foundation across global health, life sciences, education, and economic mobility — a four-year commitment.</p>
+      </div>
+      <div class="triple-card">
+        <div class="label">Product 03</div>
+        <h3>Claude for Small Business: HubSpot, QuickBooks, PayPal</h3>
+        <div class="stat">15</div>
+        <p>15 agentic workflows pre-built across QuickBooks, PayPal, HubSpot, Canva, and Google Workspace. Available as a toggle in Claude Cowork. Free PayPal AI Fluency course bundled. Small business, meet AI agents.</p>
+      </div>
+    </div>
+
+    <div class="story-body">
+      <p>Read these three moves as a single strategic signal, not three separate announcements. Anthropic is simultaneously capturing the largest professional services channel (PwC's global workforce), establishing institutional credibility in sectors beyond tech (Gates Foundation's health and education mandate), and opening the bottom of the market (small business product with consumer-grade onboarding). This is full-stack market capture — enterprise, institutional, and SMB in a seven-day sprint.</p>
+      <p>The PwC deal deserves particular attention for what it implies about enterprise AI distribution. If 30,000 PwC professionals are certified on Claude, those are the people sitting in the rooms where enterprise AI transformation decisions get made. PwC becomes the de facto Anthropic sales force inside every major corporation it serves. That's a distribution moat that OpenAI's Deployment Company acquisition of Tomoro will take years to replicate at this scale.</p>
+    </div>
+
+    <div class="wtd">
+      <div class="wtd-label">What To Do With This</div>
+      <div class="wtd-items">
+        <div class="wtd-item"><strong>LinkedIn:</strong> "Anthropic made three different enterprise bets in one week. Here's the pattern that most people are missing — and what it tells you about who's winning the enterprise AI distribution war."</div>
+        <div class="wtd-item"><strong>Business:</strong> PwC's Claude certification creates a new talent signal to watch: professionals actively seeking Claude Cowork certification. Track this as a leading indicator of enterprise AI readiness in your client base.</div>
+        <div class="wtd-item"><strong>GTM:</strong> Claude for Small Business positions Reejig's Cowork plugin ecosystem as a first-mover advantage. Users discovering Claude through HubSpot or QuickBooks will encounter your capabilities earlier in their AI journey.</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- S3: SERVICENOW TIERS -->
+<article id="s3" class="teal-story">
+  <div class="teal-inner">
+    <div>
+      <div class="teal-num">03</div>
+      <div class="story-meta" style="color: rgba(212,237,232,0.35);">
+        <span class="source">ServiceNow Newsroom · ComputerWeekly · MarkTechPost</span> &nbsp;·&nbsp; April–May 2026
+      </div>
+      <h2 class="teal-headline">ServiceNow Restructured Its Entire Commercial Model Around Agentic AI. No One Noticed.</h2>
+      <div class="tier-table">
+        <div class="tier-row">
+          <div class="tier-name">Foundation</div>
+          <div class="tier-desc">AI + Workflow Data Fabric + AI Control Tower included by default. Moveworks integration bundled.</div>
+        </div>
+        <div class="tier-row">
+          <div class="tier-name">Advanced</div>
+          <div class="tier-desc">All Foundation features + expanded process mining, deeper agent orchestration tools.</div>
+        </div>
+        <div class="tier-row">
+          <div class="tier-name">Prime</div>
+          <div class="tier-desc">Fully autonomous ITSM agents + L1 Service Desk AI Specialist. Agentic AI is the product, not the add-on.</div>
+        </div>
+      </div>
+      <div class="story-body">
+        <p>ServiceNow's April 9th commercial restructuring received almost no press coverage relative to its significance. The company embedded AI, its Workflow Data Fabric, AI Control Tower, and Moveworks across every tier by default — not as a premium add-on, not as a separate SKU, but as the baseline product. This is the commercial equivalent of a declaration: agentic AI is no longer a feature, it's the platform.</p>
+      </div>
+    </div>
+    <div>
+      <p class="pull-quote">"The companies that embed AI governance into their default tier — not their enterprise tier — will own the compliance-forward enterprise buyer."</p>
+      <div class="story-body">
+        <p>The NVIDIA partnership announced at ServiceNow Knowledge 2026 extends this further: agentic AI governance from desktops to data centers, covering the full infrastructure stack for organizations deploying autonomous agents at scale. The AI Control Tower — centralized agent monitoring and auditability — is now the feature CIOs are asking for by name. Security and governance aren't blocking agentic AI adoption; they're the reason to choose ServiceNow over every other platform.</p>
+        <p>The Accenture forward-deployed engineering program, announced the same week, is ServiceNow's answer to the PwC-Anthropic play: embed deeply with a major systems integrator and turn that partner into a distribution engine for your agentic platform. Different vendor, identical strategy.</p>
+      </div>
+      <div class="wtd" style="border-color: rgba(255,255,255,0.15); margin-top: 1.5rem;">
+        <div class="wtd-label" style="color: #7fffd4;">What To Do With This</div>
+        <div class="wtd-items">
+          <div class="wtd-item" style="color: rgba(212,237,232,0.65);"><strong>LinkedIn:</strong> "ServiceNow just restructured its entire pricing model around AI agents. Here's what that tells you about every enterprise software vendor's roadmap for 2027."</div>
+          <div class="wtd-item" style="color: rgba(212,237,232,0.65);"><strong>GTM:</strong> AI governance is the new enterprise buyer's top question. Any Reejig content around "how to govern AI agents in your workforce" maps directly to the ServiceNow buyer's journey.</div>
+          <div class="wtd-item" style="color: rgba(212,237,232,0.65);"><strong>Business:</strong> Other Company's advisory lens: clients on ServiceNow contracts renewing in H2 2026 need a tier renegotiation conversation before auto-renewal. AI is now in every tier — at a price.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- S4: SALESFORCE MONEY -->
+<article id="s4" class="money-story">
+  <div class="money-inner">
+    <div>
+      <div class="story-meta"><span class="source">Salesforce Investor Relations · TechHQ · AInvest</span> &nbsp;·&nbsp; February–May 2026</div>
+      <h2 class="money-headline">Salesforce's Agentforce Crossed $800M ARR. Benioff Mocked the "SaaSpocalypse." He Was Right.</h2>
+      <div class="story-body">
+        <p>Salesforce's Q4 FY2026 earnings delivered the number that silenced the "AI will kill SaaS" narrative: Agentforce ARR at $800M, up 169% year-over-year, on 29,000 deals. More than 60% of those bookings came from existing customer expansion — existing Salesforce accounts buying more, not net new logos. The SaaS renewal is happening inside the existing installed base.</p>
+        <p>The product-led growth story is in the usage data: 20 trillion tokens consumed, converted into 2.4 billion agentic work units. These are not demo metrics. They're production throughput numbers from enterprise customers running real workflows. The distinction matters because it shows that agentic AI has cleared the "will enterprises actually use this?" threshold and entered the "how do we scale this?" phase.</p>
+        <p>The Agentic Enterprise License Agreement (AELA) — flat-fee pricing for enterprise agent deployment — is the vehicle for that scaling. Per-seat logic collapses when agents do the work. Salesforce saw it coming early and built the commercial structure before their customers asked for it. That's what pricing leadership looks like.</p>
+      </div>
+    </div>
+    <div>
+      <div class="big-arro">$800M</div>
+      <div class="big-arro-label">Agentforce ARR · FY2026</div>
+      <div class="stat-stack">
+        <div class="stat-item">
+          <div class="n">169%</div>
+          <div class="d">Year-over-year ARR growth</div>
+        </div>
+        <div class="stat-item">
+          <div class="n">29,000</div>
+          <div class="d">Deals closed since launch</div>
+        </div>
+        <div class="stat-item">
+          <div class="n">2.4B</div>
+          <div class="d">Agentic work units executed</div>
+        </div>
+      </div>
+      <div class="wtd" style="border-color: var(--rule);">
+        <div class="wtd-label" style="color: var(--orange);">What To Do With This</div>
+        <div class="wtd-items">
+          <div class="wtd-item"><strong>LinkedIn:</strong> "The SaaSpocalypse didn't happen. Here's what actually did — and the $800M data point that proves enterprise software isn't dying, it's upgrading."</div>
+          <div class="wtd-item"><strong>GTM:</strong> Salesforce customers expanding via Agentforce are your warmest audience for organizational AI readiness work. They're buying the tool; they still need the transformation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- S5: AGENT WASHING -->
+<article id="s5" class="glitch-story">
+  <div class="glitch-inner">
+    <div class="glitch-eyebrow">ERROR: CLAIMS DO NOT MATCH CAPABILITIES // REPORT #5</div>
+    <div class="story-meta" style="color: #666; font-family: monospace;"><span style="color: #ff3a3a;">Gartner · Debevoise Data · Harvard Corp Gov Blog · MarkTechPost</span> &nbsp;·&nbsp; March–May 2026</div>
+    <h2 class="glitch-headline">// "AGENT WASHING" IS THE NEW<br>// GREENWASHING — AND GARTNER SAYS<br>// 95% OF CLAIMS ARE FRAUDULENT</h2>
+
+    <div class="fraud-meter">
+      <div class="fraud-bar-label">
+        <span>Vendor landscape: "AI Agents" marketed</span>
+        <span>95% fake / 5% real</span>
+      </div>
+      <div class="fraud-bar-track">
+        <div class="fraud-bar-fill"></div>
+        <div class="fraud-bar-real"></div>
+      </div>
+      <div class="fraud-legend">
+        <span style="color: #ff6a3a;">■ Chatbots, RPA, workflow tools rebranded as "agents"</span>
+        <span style="color: #00ff41;">■ Genuine agentic AI (autonomous, multi-step, dynamic)</span>
+      </div>
+    </div>
+
+    <div class="story-body">
+      <p>Gartner's analysis of the enterprise AI agent market found approximately 130 vendors — out of thousands claiming agentic capabilities — that actually deliver autonomous, goal-pursuing systems capable of multi-step reasoning, dynamic error handling, and genuine decision-making. The rest are legacy chatbots, RPA scripts, and linear workflow automation tools that have been rebranded with "agent" in the product name.</p>
+      <p>The practical risk to enterprises: 40% of agentic AI projects will be cancelled by 2027 because organizations are buying marketing language rather than capability. Real agents cost $0.30–$8.00 per task due to 8–15 internal API calls. Many use cases being pitched as "agentic" are better served by a 50-line automation script costing less than $0.001. The vendor has a financial incentive to tell you otherwise.</p>
+      <p>Harvard's corporate governance blog flagged the legal exposure dimension: companies face disclosure risks when they claim agentic capabilities to investors that don't exist. Agent washing has moved from a marketing problem to a securities risk. Gartner's 33% of enterprise software prediction for genuine agentic AI by 2028 — versus less than 1% in 2024 — means the authentic vendors have an enormous window before the category gets crowded with real competition.</p>
+    </div>
+
+    <div class="wtd">
+      <div class="wtd-label">$ wtd --query all</div>
+      <div class="wtd-items">
+        <div class="wtd-item"><strong>LinkedIn:</strong> "Gartner says 95% of AI agent claims are fake. Here's the three-question test I use to tell a real AI agent from a chatbot wearing a trench coat."</div>
+        <div class="wtd-item"><strong>Business:</strong> Other Company advisory differentiator: offer clients an "AI Agent Audit" — assess their vendor stack for genuine agentic capability vs. agent-washed automation. Extremely high value, low supply.</div>
+        <div class="wtd-item"><strong>GTM:</strong> Content series: "The AI Agent Buyer's Guide" — what questions to ask vendors, what demos to demand, what the real cost structure looks like. Positions you as the expert that cuts through hype.</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- S6: JPMORGAN BANK -->
+<article id="s6" class="bank-story">
+  <div class="bank-inner">
+    <div class="story-meta" style="text-align: center;"><span class="source">AI CERTs News · AI News · AInvest · Intellectia</span> &nbsp;·&nbsp; May 2026</div>
+    <h2 class="bank-headline">JPMorgan Reclassified AI as Core Infrastructure. The $19.8B Budget and $2B in Self-Funding Explain Why.</h2>
+
+    <div class="bank-stats">
+      <div class="bank-stat"><div class="n">$19.8B</div><div class="d">2026 tech budget (+10% YoY)</div></div>
+      <div class="bank-stat"><div class="n">$2B</div><div class="d">Operational savings from AI (self-funding)</div></div>
+      <div class="bank-stat"><div class="n">500+</div><div class="d">Active AI use cases in production</div></div>
+      <div class="bank-stat"><div class="n">11%</div><div class="d">Productivity gain in engineering & ops</div></div>
+    </div>
+
+    <div class="story-body">
+      <p>JPMorgan Chase has moved its AI investment out of the discretionary R&D category and placed it alongside data centers, payment systems, and core risk controls. The language Jamie Dimon used — "non-negotiable, like cybersecurity" — is the inflection language every CFO in every industry will be repeating within 18 months. When the world's largest bank by revenue treats AI spend as infrastructure rather than experiment, the justification framework for enterprise AI investment has permanently changed.</p>
+      <p>The self-funding mechanism is the argument CIOs and CFOs have been waiting for: $2B in operational savings from more than 150,000 employees. That's a 10–11% productivity gain across engineering, operations, and fraud detection. The AI investment is paying for itself before the year is out. JPMorgan's AI payback period has compressed to sub-12 months — a number that five years ago would have been dismissed as fantasy.</p>
+    </div>
+
+    <div class="wtd" style="border-color: var(--rule);">
+      <div class="wtd-label">What To Do With This</div>
+      <div class="wtd-items">
+        <div class="wtd-item"><strong>LinkedIn:</strong> "JPMorgan just put $19.8B into tech and called AI 'non-negotiable, like cybersecurity.' Here's what that framing shift means for every enterprise that's still treating AI as a pilot budget line."</div>
+        <div class="wtd-item"><strong>GTM:</strong> The ROI framework JPMorgan is using — self-funding through operational savings — is the business case template for every Reejig enterprise conversation. Adopt it explicitly in sales decks.</div>
+        <div class="wtd-item"><strong>Business:</strong> Webinar: "From experiment to infrastructure: how to make the business case for AI as a core operating investment." The JPMorgan data gives you the closing slide.</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- S7: GOOGLEBOOK PRODUCT -->
+<article id="s7" class="product-story">
+  <div class="product-inner">
+    <div class="product-category">Hardware · Story 07 · Google I/O 2026</div>
+    <div class="story-meta" style="color: rgba(224,232,255,0.35);">
+      <span style="color: #6af4ff;">TechCrunch · TechRadar · Android Central</span> &nbsp;·&nbsp; May 12–19, 2026
+    </div>
+    <h2 class="product-headline">The Googlebook Is a Laptop<br>Designed to Make Every<br>App an AI Agent</h2>
+    <p style="color: rgba(224,232,255,0.65); font-size: 1rem; font-style: italic; margin-bottom: 1.5rem; font-family: 'Fraunces', serif;">Google's new hardware category arrives this fall. It's either the future of enterprise computing or the most ambitious demo in tech history.</p>
+
+    <div class="feature-pills">
+      <span class="pill">Gemini Baked-In</span>
+      <span class="pill">Magic Pointer</span>
+      <span class="pill">Android App Support</span>
+      <span class="pill">Phone App Streaming</span>
+      <span class="pill">Vibe-Coded Widgets</span>
+      <span class="pill">Cross-App Automation</span>
+    </div>
+
+    <div class="story-body">
+      <p>Google announced the Googlebook at its Android Show on May 12th, positioning it as the first laptop designed from the ground up for Gemini Intelligence. The defining feature isn't the hardware — it's the "Magic Pointer": a cursor that surfaces context-sensitive Gemini suggestions based on whatever's on screen. Point at a contract, Gemini analyzes it. Point at a calendar, Gemini finds scheduling conflicts. The cursor becomes the AI interface layer.</p>
+      <p>This is a direct assault on Microsoft's Copilot PC strategy — but with a fundamentally different philosophical bet. Microsoft embeds Copilot as a panel and keyboard shortcut. Google is trying to make Gemini ambient — woven into the interaction model itself rather than accessed as a feature. If it works, the Googlebook isn't a laptop with AI. It's an AI that also runs a browser and a spreadsheet application.</p>
+      <p>For enterprise buyers, the Googlebook represents a third option in the AI-first hardware landscape that previously contained only Microsoft (Copilot PCs) and Apple (cautious AI integration). Launch partners include Acer, ASUS, Dell, HP, and Lenovo — meaning enterprise IT procurement teams will have familiar vendor relationships for first deployments. Fall 2026 availability gives enough runway for a Q1 2027 enterprise evaluation cycle.</p>
+    </div>
+
+    <div class="wtd">
+      <div class="wtd-label">What To Do With This</div>
+      <div class="wtd-items">
+        <div class="wtd-item"><strong>LinkedIn:</strong> "Google just invented a laptop where AI is the cursor, not a button. Here's why that subtle design decision might be the most important enterprise computing bet of 2026."</div>
+        <div class="wtd-item"><strong>GTM:</strong> Hardware category shifts are 18-month enterprise sales cycles. The CIOs buying Googlebooks in Q1 2027 are starting their evaluation now. Any Workspace + AI productivity content lands in their research phase.</div>
+        <div class="wtd-item"><strong>Business:</strong> Watch for Googlebook adoption signals at your clients' IT departments. First movers will be tech-forward mid-market companies — your ICP.</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- S8: SALESFORCE SAAS RECKONING -->
+<article id="s8" class="editorial-story">
+  <div class="editorial-inner">
+    <div>
+      <div class="story-meta"><span class="source">SaaS Mag · Deloitte · BetterCloud · Constellation Research</span> &nbsp;·&nbsp; May 2026</div>
+      <h2 class="editorial-headline">The "SaaSpocalypse" Was Wrong. What's Actually Happening to Software Pricing Is More Interesting.</h2>
+      <div class="story-body">
+        <p>The narrative that AI would kill SaaS by replacing software subscriptions with AI that does the work directly was wrong about the mechanism — but right about the disruption. What's actually happening is more nuanced: SaaS pricing is bifurcating into outcome-based and seat-based models simultaneously, with agents replacing the repetitive task layer while humans move up the value chain to judgment and oversight roles.</p>
+        <p>The evidence: Salesforce's AELA (flat fee for agents), ServiceNow's restructure toward AI-native tiers, Deloitte's projection of a $45B agentic AI market by 2030 from $8.5B today. But per-seat SaaS isn't dying — it's evolving. 80% of enterprises are still deploying GenAI-enabled apps on top of their existing SaaS stacks, not replacing them. The disruption is additive in the short term and substitutive in the medium term.</p>
+        <p>The CFO conversation that's happening in every large enterprise right now: "Our SaaS spend is increasing because AI agents require software access. But headcount isn't growing at the same rate. At some point those lines cross." When they do, the per-seat SaaS model faces its first structural challenge since Salesforce invented it. The vendors that build outcome-based pricing before their customers demand it will own the next decade.</p>
+      </div>
+    </div>
+    <div>
+      <div class="sidebar-quote">"Agents don't buy seats. They consume outcomes. The vendor that figures out how to price outcomes first will own the next enterprise software cycle."</div>
+      <div class="sidebar-stat"><div class="n">$45B</div><div class="d">Agentic AI market by 2030</div></div>
+      <div class="sidebar-stat"><div class="n">53%</div><div class="d">Projected CAGR for agentic AI</div></div>
+      <div class="wtd" style="margin-top: 1.5rem; border-color: var(--rule);">
+        <div class="wtd-label" style="color: var(--silver);">What To Do With This</div>
+        <div class="wtd-items">
+          <div class="wtd-item"><strong>LinkedIn:</strong> "SaaS didn't die. The pricing model did. Here's the $45B market opportunity that opened up in its place — and which vendors are ready for it."</div>
+          <div class="wtd-item"><strong>GTM:</strong> CFO-focused content: "How to model your SaaS budget when agents become co-users." Extremely timely, underserved in current content landscape.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- S9: ANTHROPIC COMPUTE -->
+<article id="s9" class="compute-story">
+  <div class="compute-inner">
+    <div class="story-meta" style="color: rgba(224,208,255,0.35);">
+      <span style="color: #c0a0ff;">Anthropic.com · Claude for Financial Services · AI CERTs</span> &nbsp;·&nbsp; May 2026
+    </div>
+    <h2 class="compute-headline">Anthropic Closed the Compute Gap. Google, Broadcom, Goldman, Blackstone — All in One Strategic Arc.</h2>
+    <p class="compute-deck">"The most significant compute commitment in Anthropic's history." — Anthropic announcement on Google + Broadcom partnership</p>
+
+    <div class="partner-row">
+      <div class="partner-cell"><div class="name">Google</div><div class="role">Primary Compute + Distribution</div></div>
+      <div class="partner-cell"><div class="name">Broadcom</div><div class="role">Custom AI Chip Infrastructure</div></div>
+      <div class="partner-cell"><div class="name">Goldman Sachs</div><div class="role">Enterprise Deployment Capital</div></div>
+      <div class="partner-cell"><div class="name">Blackstone</div><div class="role">Enterprise Deployment Capital</div></div>
+      <div class="partner-cell"><div class="name">PwC</div><div class="role">Professional Services Distribution</div></div>
+    </div>
+
+    <div class="story-body">
+      <p>Anthropic's strategic architecture is becoming visible as a system rather than a series of individual announcements. The Google + Broadcom compute partnership fills the most critical infrastructure gap — Anthropic had been compute-constrained relative to OpenAI's Azure relationship, and Google's TPU infrastructure plus Broadcom's custom silicon changes that equation. This is the foundation the enterprise expansion strategy requires.</p>
+      <p>Map the partners as a complete supply chain: Google/Broadcom provide the compute, Goldman/Blackstone provide the deployment capital, PwC provides the professional services distribution channel, and the Claude for Financial Services product — announced simultaneously — gives all three Goldman and Blackstone portfolio companies a direct adoption pathway. It's a vertically integrated enterprise AI go-to-market strategy disguised as a series of separate partnership announcements.</p>
+      <p>For enterprise AI buyers, Anthropic is now the only foundation model provider with a complete stack: frontier model, proprietary compute infrastructure, deployment financing, professional services distribution, and sector-specific product bundles. OpenAI has the brand. Anthropic is building the infrastructure. In enterprise, infrastructure wins.</p>
+    </div>
+
+    <div class="wtd">
+      <div class="wtd-label">What To Do With This</div>
+      <div class="wtd-items">
+        <div class="wtd-item"><strong>LinkedIn:</strong> "Anthropic's five partnerships this month look separate. They're not. Here's the vertically integrated enterprise AI strategy hiding in plain sight."</div>
+        <div class="wtd-item"><strong>GTM:</strong> The "Claude for Financial Services" product launch is a direct signal to your financial services clients. Any CHRO, CDO, or Chief AI Officer at a bank should be in your newsletter audience.</div>
+        <div class="wtd-item"><strong>Business:</strong> Anthropic's strategy creates a platform dependency opportunity. As the "Anthropic ecosystem" solidifies, the premium on experts who can navigate it — certifications, integrations, workflows — rises sharply.</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- S10: COPILOT IDENTITY CRISIS -->
+<article id="s10" class="news-story">
+  <div class="news-inner">
+    <div class="news-kicker">Story Ten · Enterprise Software · May 2026</div>
+    <h2 class="news-headline">Microsoft Copilot Has 160 Million Enterprise Users — and an Identity Crisis</h2>
+    <div class="news-byline">Stackmatix · AI Business Weekly · Microsoft Copilot Blog · May 2026</div>
+
+    <div class="news-columns">
+      <div class="story-body">
+        <p>Microsoft's Copilot for Microsoft 365 now has 160 million enterprise-licensed users and 420 million monthly active users across all surfaces — numbers that would be a triumph if the product knew what it was. The reality in 2026: Copilot is simultaneously a consumer assistant, an enterprise AI layer, a coding tool, a model aggregator, and a platform for custom agents. That's not a product strategy. That's a category problem.</p>
+        <div class="news-pullquote">"160 million enterprise Copilot licenses. But the reasoning engine quietly switched to Claude. The product says Microsoft. The intelligence says Anthropic."</div>
+        <p>The structural tension is acute: Microsoft 365 Copilot now routes enterprise reasoning tasks to Claude while keeping GPT models for consumer scenarios. Over 120,000 custom agents are deployed across enterprises via Copilot Studio. The model-agnostic future that Microsoft is quietly building contradicts the "Microsoft AI" brand it publicly promotes.</p>
+        <p>For enterprise buyers, this creates a specific evaluation challenge: when you buy Copilot, you're not buying a model. You're buying an orchestration layer that abstracts the underlying AI. That's actually a reasonable enterprise posture — vendor-agnostic, governed, familiar interface — but it requires being honest about what Copilot is. It's not Microsoft's AI. It's Microsoft's AI interface.</p>
+      </div>
+    </div>
+
+    <div class="wtd" style="margin-top: 2rem; border-color: var(--rule);">
+      <div class="wtd-label" style="color: var(--silver);">What To Do With This</div>
+      <div class="wtd-items">
+        <div class="wtd-item"><strong>LinkedIn:</strong> "Microsoft Copilot has 160M enterprise users. The reasoning engine is Anthropic. The brand is Microsoft. The strategy is 'whoever has the best model, we'll use it.' Here's why that's actually smart — and the one thing it can't solve."</div>
+        <div class="wtd-item"><strong>GTM:</strong> Copilot's model-agnostic posture is a buying signal for transformation partners. Customers who adopted Copilot because it felt "safe" are now realizing safety isn't a strategy. That's your opening.</div>
+        <div class="wtd-item"><strong>Business:</strong> The "AI interface vs. AI intelligence" distinction is a high-value framing for CIO content. Write the 800-word piece. It's not on the internet yet.</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- PATTERNS -->
+<section id="patterns" class="patterns-section">
+  <div class="patterns-inner">
+    <h2>Patterns Emerging</h2>
+    <p class="sub">Recurring signals across today's edition · May 19, 2026</p>
+    <div class="patterns-grid">
+      <div class="pattern-card">
+        <h3>Distribution Is the New Moat — Not the Model</h3>
+        <p>Anthropic's PwC deal, ServiceNow's Accenture partnership, Google I/O's OEM hardware strategy, Salesforce's installed base expansion — every major AI winner this week won through distribution, not technology. The model race is commoditizing. The distribution race is just starting.</p>
+      </div>
+      <div class="pattern-card">
+        <h3>Enterprise AI Has a Trust Deficit — and a Governance Opportunity</h3>
+        <p>Gartner's 95% agent washing figure, ServiceNow's AI Control Tower as a default feature, and only 6% of enterprises fully trusting autonomous agents all point to the same gap: the market has tools, not trust. The vendors and advisors who solve for enterprise-grade auditability, explainability, and governance will win disproportionately.</p>
+      </div>
+      <div class="pattern-card">
+        <h3>The ROI Case Has Closed — Now Comes the Organizational Change Case</h3>
+        <p>JPMorgan's $2B self-funded AI returns, Salesforce's $800M Agentforce ARR, and Anthropic's 80x revenue growth all confirm that enterprise AI economics work. The conversation has shifted from "does this pay off?" to "how do we reorganize around it?" That's a harder problem — and a much bigger services opportunity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POST IDEAS -->
+<section id="post-ideas" class="post-ideas-section">
+  <div class="post-ideas-inner">
+    <h2>Ideas Worth Posting About Today</h2>
+    <p class="sub">3 LinkedIn angles from today's edition · May 19, 2026</p>
+    <div class="post-cards">
+      <div class="post-card">
+        <div class="num">01</div>
+        <h3>Live Google I/O Reaction Post</h3>
+        <p>Publish a 3-point reaction within an hour of the keynote ending. Your angle: "What I actually think matters for enterprise buyers — and what's just product theater." Speed plus specificity wins on event days. Even 200 words outperforms a polished take published 6 hours later.</p>
+      </div>
+      <div class="post-card">
+        <div class="num">02</div>
+        <h3>The Agent Washing Exposé</h3>
+        <p>Lead with the Gartner stat (95% fake), give your three-question test for real agentic AI, close with what it costs a company to buy a fake agent and discover it in production. Extremely shareable among enterprise tech buyers who've been burned. High comment potential — practitioners will add their own horror stories.</p>
+      </div>
+      <div class="post-card">
+        <div class="num">03</div>
+        <h3>The ROI Case Is Closed. What Now?</h3>
+        <p>Synthesize JPMorgan ($2B savings), Salesforce ($800M ARR), Anthropic (80x growth) into a single argument: the "does AI pay off?" era is over. The "how do we reorganize?" era has started. That's a harder problem — and the one you actually help with. Directly positions Other Company without feeling like a sales pitch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span class="logo">Morning Magazine</span>
+  <span>Curated for Jeff Mack · Tuesday, May 19, 2026 · Other Company</span>
+  <span>Built with Claude · Cowork Mode</span>
+</footer>
+
+</body>
+</html>
