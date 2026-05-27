@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Edition — May 26, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f5f1eb;
+    --cream: #faf7f2;
+    --accent-red: #c0392b;
+    --accent-amber: #e67e22;
+    --accent-blue: #1a3a5c;
+    --accent-mint: #1abc9c;
+    --accent-slate: #2c3e50;
+    --accent-gold: #d4a017;
+    --mid-gray: #888;
+    --light-gray: #ddd;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  .top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    color: #fff;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    gap: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .top-nav .brand { font-family: 'Fraunces', serif; font-size: 18px; letter-spacing: 0; text-transform: none; font-weight: 700; color: #fff; white-space: nowrap; }
+  .top-nav .date-tag { color: #aaa; white-space: nowrap; }
+  .nav-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: flex-end; }
+  .nav-links a { color: #ccc; text-decoration: none; transition: color .2s; white-space: nowrap; }
+  .nav-links a:hover { color: #fff; }
+
+  /* MASTHEAD */
+  .masthead {
+    background: var(--ink);
+    color: #fff;
+    text-align: center;
+    padding: 72px 32px 64px;
+    border-bottom: 4px solid var(--accent-amber);
+  }
+  .masthead-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-amber); margin-bottom: 20px; }
+  .masthead h1 { font-family: 'Fraunces', serif; font-size: clamp(52px, 8vw, 110px); font-weight: 900; line-height: 1; letter-spacing: -2px; margin-bottom: 16px; }
+  .masthead .edition-date { font-size: 14px; color: #aaa; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 40px; }
+  .masthead .issue-kicker { font-family: 'Fraunces', serif; font-size: clamp(20px, 3vw, 28px); font-style: italic; color: #ddd; max-width: 700px; margin: 0 auto; line-height: 1.4; }
+
+  /* EDITOR'S NOTE */
+  .editors-note {
+    background: var(--accent-blue);
+    color: #fff;
+    padding: 56px 48px;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .editors-note::before { content: 'EDITOR\'S NOTE'; font-size: 10px; font-weight: 800; letter-spacing: .25em; color: var(--accent-amber); display: block; margin-bottom: 20px; }
+  .editors-note h2 { font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; }
+  .editors-note p { font-size: 16px; line-height: 1.8; color: #ccd; }
+  .editors-note p + p { margin-top: 16px; }
+
+  /* SECTION DIVIDER */
+  .section-divider {
+    text-align: center;
+    padding: 48px 32px 32px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--light-gray); }
+
+  /* STORY COUNT BADGE */
+  .story-num {
+    display: inline-block;
+    font-family: 'Fraunces', serif;
+    font-size: 100px;
+    font-weight: 900;
+    line-height: 1;
+    color: rgba(0,0,0,.06);
+    position: absolute;
+    top: -10px;
+    right: 24px;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* LIGHTNING BADGE */
+  .urgent-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-red);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    margin-bottom: 16px;
+  }
+
+  /* STORY WRAPPERS */
+  .story-wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* WHAT TO DO BOX */
+  .what-to-do {
+    margin-top: 32px;
+    border-left: 4px solid var(--accent-amber);
+    padding: 20px 24px;
+    background: rgba(0,0,0,.03);
+  }
+  .what-to-do h4 { font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-amber); margin-bottom: 12px; }
+  .what-to-do ul { list-style: none; padding: 0; }
+  .what-to-do ul li { font-size: 14px; line-height: 1.6; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,.07); color: #333; }
+  .what-to-do ul li:last-child { border: none; }
+  .what-to-do ul li strong { color: var(--ink); }
+  .datestamp { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--mid-gray); margin-bottom: 12px; display: block; }
+
+  /* =========================================
+     STORY 1 — HERO LAYOUT (dark amber)
+  ========================================= */
+  #story-1 {
+    background: #1a0a00;
+    color: #fff;
+    padding: 80px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+  #story-1 .hero-inner { max-width: 1100px; margin: 0 auto; padding: 0 48px 0; }
+  #story-1 .kicker { font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-amber); margin-bottom: 20px; }
+  #story-1 h2 { font-family: 'Fraunces', serif; font-size: clamp(36px, 5vw, 68px); font-weight: 900; line-height: 1.05; letter-spacing: -1px; margin-bottom: 24px; max-width: 820px; }
+  #story-1 .why-matters { font-size: 19px; font-style: italic; color: var(--accent-amber); margin-bottom: 32px; font-family: 'Fraunces', serif; max-width: 700px; line-height: 1.5; }
+  #story-1 p { font-size: 16px; line-height: 1.85; color: #ddd; max-width: 740px; }
+  #story-1 p + p { margin-top: 16px; }
+  #story-1 .stat-bar { background: var(--accent-amber); padding: 32px 48px; margin-top: 48px; display: flex; gap: 64px; flex-wrap: wrap; }
+  #story-1 .stat-item .num { font-family: 'Fraunces', serif; font-size: 56px; font-weight: 900; color: var(--ink); line-height: 1; }
+  #story-1 .stat-item .label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #333; margin-top: 4px; }
+  #story-1 .what-to-do { border-left-color: var(--accent-amber); background: rgba(255,255,255,.06); padding: 24px 48px; margin: 0; }
+  #story-1 .what-to-do h4 { color: var(--accent-amber); }
+  #story-1 .what-to-do ul li { color: #ccc; border-bottom-color: rgba(255,255,255,.1); }
+  #story-1 .what-to-do ul li strong { color: #fff; }
+  #story-1 .datestamp { color: #888; }
+
+  /* =========================================
+     STORY 2 — MIDNIGHT DARK MODE
+  ========================================= */
+  #story-2 {
+    background: #050d1a;
+    color: #e0e8f0;
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  #story-2::before { content: 'FRONTIER'; position: absolute; top: 20px; right: -20px; font-family: 'Fraunces', serif; font-size: 180px; font-weight: 900; color: rgba(26,58,92,.4); line-height: 1; pointer-events: none; letter-spacing: -4px; }
+  #story-2 .inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; position: relative; }
+  #story-2 .kicker { font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #4fc3f7; margin-bottom: 20px; }
+  #story-2 h2 { font-family: 'Fraunces', serif; font-size: clamp(34px, 5vw, 62px); font-weight: 900; line-height: 1.08; letter-spacing: -1px; margin-bottom: 24px; max-width: 860px; color: #fff; }
+  #story-2 .why-matters { font-size: 18px; font-style: italic; color: #4fc3f7; margin-bottom: 32px; font-family: 'Fraunces', serif; max-width: 680px; line-height: 1.5; }
+  #story-2 p { font-size: 16px; line-height: 1.85; color: #b0c4de; max-width: 740px; }
+  #story-2 p + p { margin-top: 16px; }
+  #story-2 .terminal-box { background: #0d1117; border: 1px solid #30363d; padding: 24px; margin-top: 32px; font-family: 'Courier New', monospace; font-size: 13px; color: #58a6ff; max-width: 740px; line-height: 1.8; }
+  #story-2 .terminal-box .comment { color: #8b949e; }
+  #story-2 .what-to-do { border-left-color: #4fc3f7; background: rgba(79,195,247,.06); margin-top: 32px; max-width: 740px; }
+  #story-2 .what-to-do h4 { color: #4fc3f7; }
+  #story-2 .what-to-do ul li { color: #b0c4de; border-bottom-color: rgba(255,255,255,.08); }
+  #story-2 .what-to-do ul li strong { color: #fff; }
+  #story-2 .datestamp { color: #4a6070; }
+
+  /* =========================================
+     STORY 3 — ROSE ALERT
+  ========================================= */
+  #story-3 {
+    background: var(--cream);
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+    border-top: 8px solid var(--accent-red);
+  }
+  #story-3 .alert-stamp {
+    background: var(--accent-red);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    display: inline-block;
+    margin-bottom: 24px;
+  }
+  #story-3 .inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+  #story-3 h2 { font-family: 'Fraunces', serif; font-size: clamp(34px, 5vw, 62px); font-weight: 900; line-height: 1.08; letter-spacing: -1px; margin-bottom: 24px; max-width: 820px; }
+  #story-3 .why-matters { font-size: 18px; font-style: italic; color: var(--accent-red); margin-bottom: 32px; font-family: 'Fraunces', serif; max-width: 680px; line-height: 1.5; }
+  #story-3 p { font-size: 16px; line-height: 1.85; color: #222; max-width: 740px; }
+  #story-3 p + p { margin-top: 16px; }
+  #story-3 .pull-quote { font-family: 'Fraunces', serif; font-size: clamp(22px, 3vw, 34px); font-style: italic; font-weight: 700; line-height: 1.3; color: var(--accent-red); border-left: 6px solid var(--accent-red); padding: 16px 24px; margin: 32px 0; max-width: 680px; }
+  #story-3 .what-to-do { border-left-color: var(--accent-red); }
+  #story-3 .what-to-do h4 { color: var(--accent-red); }
+  #story-3 .datestamp { color: var(--mid-gray); }
+
+  /* =========================================
+     STORY 4 — TERMINAL / HACKER
+  ========================================= */
+  #story-4 {
+    background: #0f0f0f;
+    color: #00ff41;
+    padding: 80px 0;
+    font-family: 'Courier New', monospace;
+    position: relative;
+  }
+  #story-4 .inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+  #story-4 .kicker { font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: #00ff41; margin-bottom: 16px; opacity: .7; }
+  #story-4 .kicker::before { content: '> '; }
+  #story-4 h2 { font-family: 'Fraunces', serif; font-size: clamp(30px, 4.5vw, 58px); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 24px; max-width: 840px; color: #fff; }
+  #story-4 .why-matters { font-size: 16px; color: #00ff41; margin-bottom: 32px; max-width: 680px; line-height: 1.7; font-family: 'Courier New', monospace; }
+  #story-4 p { font-size: 15px; line-height: 1.9; color: #aaa; max-width: 740px; font-family: 'Inter', sans-serif; }
+  #story-4 p + p { margin-top: 16px; }
+  #story-4 .code-block { background: #161616; border: 1px solid #333; padding: 20px 24px; margin: 28px 0; font-size: 13px; line-height: 1.9; max-width: 740px; }
+  #story-4 .code-block .hl { color: #00ff41; }
+  #story-4 .code-block .dim { color: #666; }
+  #story-4 .what-to-do { border-left-color: #00ff41; background: rgba(0,255,65,.05); }
+  #story-4 .what-to-do h4 { color: #00ff41; }
+  #story-4 .what-to-do ul li { color: #aaa; border-bottom-color: rgba(255,255,255,.08); }
+  #story-4 .what-to-do ul li strong { color: #fff; }
+  #story-4 .datestamp { color: #555; }
+
+  /* =========================================
+     STORY 5 — ACADEMIC DROP-CAP
+  ========================================= */
+  #story-5 {
+    background: #fff;
+    padding: 80px 0;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  #story-5 .inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1fr 320px; gap: 64px; align-items: start; }
+  #story-5 .main-col {}
+  #story-5 .side-col { border-left: 2px solid var(--ink); padding-left: 32px; padding-top: 8px; }
+  #story-5 .kicker { font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #666; margin-bottom: 20px; }
+  #story-5 h2 { font-family: 'Fraunces', serif; font-size: clamp(30px, 4vw, 52px); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 24px; }
+  #story-5 .why-matters { font-size: 17px; font-style: italic; color: #444; margin-bottom: 32px; font-family: 'Fraunces', serif; line-height: 1.5; }
+  #story-5 p { font-size: 16px; line-height: 1.9; color: #222; }
+  #story-5 p + p { margin-top: 16px; }
+  #story-5 p:first-of-type::first-letter { font-family: 'Fraunces', serif; font-size: 80px; font-weight: 900; float: left; line-height: 0.8; margin: 8px 12px 0 0; color: var(--ink); }
+  #story-5 .side-stat { margin-bottom: 32px; }
+  #story-5 .side-stat .big-num { font-family: 'Fraunces', serif; font-size: 64px; font-weight: 900; line-height: 1; color: var(--ink); }
+  #story-5 .side-stat .desc { font-size: 13px; color: #666; line-height: 1.5; margin-top: 6px; }
+  #story-5 .what-to-do { margin-top: 32px; }
+  #story-5 .datestamp { color: var(--mid-gray); }
+  @media (max-width: 768px) { #story-5 .inner { grid-template-columns: 1fr; } #story-5 .side-col { border-left: none; border-top: 2px solid var(--ink); padding-left: 0; padding-top: 32px; } }
+
+  /* =========================================
+     STORY 6 — BIG STAT FINISH
+  ========================================= */
+  #story-6 {
+    background: var(--accent-slate);
+    color: #fff;
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  #story-6 .inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+  #story-6 .kicker { font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-mint); margin-bottom: 20px; }
+  #story-6 h2 { font-family: 'Fraunces', serif; font-size: clamp(32px, 4.5vw, 58px); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 24px; max-width: 820px; }
+  #story-6 .why-matters { font-size: 17px; font-style: italic; color: var(--accent-mint); margin-bottom: 32px; font-family: 'Fraunces', serif; max-width: 680px; line-height: 1.5; }
+  #story-6 p { font-size: 16px; line-height: 1.85; color: #b0bec5; max-width: 740px; }
+  #story-6 p + p { margin-top: 16px; }
+  #story-6 .big-stat-row { display: flex; gap: 48px; flex-wrap: wrap; margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,.15); }
+  #story-6 .big-stat .num { font-family: 'Fraunces', serif; font-size: 72px; font-weight: 900; color: #fff; line-height: 1; }
+  #story-6 .big-stat .label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #78909c; margin-top: 6px; max-width: 180px; line-height: 1.4; }
+  #story-6 .what-to-do { border-left-color: var(--accent-mint); background: rgba(26,188,156,.08); margin-top: 32px; }
+  #story-6 .what-to-do h4 { color: var(--accent-mint); }
+  #story-6 .what-to-do ul li { color: #b0bec5; border-bottom-color: rgba(255,255,255,.08); }
+  #story-6 .what-to-do ul li strong { color: #fff; }
+  #story-6 .datestamp { color: #546e7a; }
+
+  /* =========================================
+     STORY 7 — PULL-QUOTE EDITORIAL
+  ========================================= */
+  #story-7 {
+    background: var(--cream);
+    padding: 80px 0;
+    position: relative;
+  }
+  #story-7 .inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+  #story-7 .kicker { font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #888; margin-bottom: 20px; }
+  #story-7 h2 { font-family: 'Fraunces', serif; font-size: clamp(32px, 4.5vw, 58px); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 24px; max-width: 820px; }
+  #story-7 .why-matters { font-size: 17px; font-style: italic; color: #555; margin-bottom: 32px; font-family: 'Fraunces', serif; max-width: 680px; line-height: 1.5; }
+  #story-7 p { font-size: 16px; line-height: 1.85; color: #222; max-width: 740px; }
+  #story-7 p + p { margin-top: 16px; }
+  #story-7 .mega-pull-quote { font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 48px); font-weight: 900; font-style: italic; line-height: 1.2; color: var(--ink); padding: 40px 0; border-top: 4px solid var(--ink); border-bottom: 4px solid var(--ink); margin: 40px 0; max-width: 800px; }
+  #story-7 .datestamp { color: var(--mid-gray); }
+
+  /* =========================================
+     STORY 8 — ENTERPRISE DASHBOARD
+  ========================================= */
+  #story-8 {
+    background: #0e1629;
+    color: #e8f0fe;
+    padding: 80px 0;
+    position: relative;
+  }
+  #story-8 .inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+  #story-8 .kicker { font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #60a5fa; margin-bottom: 20px; }
+  #story-8 h2 { font-family: 'Fraunces', serif; font-size: clamp(30px, 4.5vw, 56px); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 24px; max-width: 820px; color: #fff; }
+  #story-8 .why-matters { font-size: 17px; font-style: italic; color: #60a5fa; margin-bottom: 32px; font-family: 'Fraunces', serif; max-width: 680px; line-height: 1.5; }
+  #story-8 p { font-size: 16px; line-height: 1.85; color: #94a3b8; max-width: 740px; }
+  #story-8 p + p { margin-top: 16px; }
+  #story-8 .dashboard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; max-width: 740px; }
+  #story-8 .dashboard-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); padding: 20px; border-radius: 4px; }
+  #story-8 .dashboard-card .card-label { font-size: 10px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; color: #60a5fa; margin-bottom: 8px; }
+  #story-8 .dashboard-card .card-val { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 900; color: #fff; line-height: 1; }
+  #story-8 .dashboard-card .card-sub { font-size: 12px; color: #64748b; margin-top: 4px; }
+  @media (max-width: 600px) { #story-8 .dashboard-grid { grid-template-columns: 1fr 1fr; } }
+  #story-8 .what-to-do { border-left-color: #60a5fa; background: rgba(96,165,250,.06); margin-top: 32px; }
+  #story-8 .what-to-do h4 { color: #60a5fa; }
+  #story-8 .what-to-do ul li { color: #94a3b8; border-bottom-color: rgba(255,255,255,.08); }
+  #story-8 .what-to-do ul li strong { color: #fff; }
+  #story-8 .datestamp { color: #334155; }
+
+  /* =========================================
+     STORY 9 — NEWSPAPER
+  ========================================= */
+  #story-9 {
+    background: #f9f6f0;
+    padding: 80px 0;
+    border-top: 3px double #000;
+    border-bottom: 3px double #000;
+  }
+  #story-9 .inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+  #story-9 .kicker { font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #666; margin-bottom: 8px; }
+  #story-9 h2 { font-family: 'Fraunces', serif; font-size: clamp(30px, 4.5vw, 58px); font-weight: 900; line-height: 1.08; letter-spacing: -1px; margin-bottom: 8px; max-width: 820px; border-bottom: 2px solid #000; padding-bottom: 16px; }
+  #story-9 .byline { font-size: 13px; font-style: italic; color: #666; margin-bottom: 24px; margin-top: 12px; }
+  #story-9 .why-matters { font-size: 17px; font-style: italic; color: #444; margin-bottom: 24px; font-family: 'Fraunces', serif; max-width: 680px; line-height: 1.5; border-left: 4px solid #333; padding-left: 16px; }
+  #story-9 .cols { column-count: 2; column-gap: 48px; column-rule: 1px solid #ccc; }
+  #story-9 p { font-size: 15px; line-height: 1.85; color: #222; margin-bottom: 16px; }
+  @media (max-width: 700px) { #story-9 .cols { column-count: 1; } }
+  #story-9 .what-to-do { margin-top: 32px; }
+  #story-9 .datestamp { color: var(--mid-gray); }
+
+  /* =========================================
+     STORY 10 — SWISS GRID
+  ========================================= */
+  #story-10 {
+    background: var(--accent-gold);
+    color: var(--ink);
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  #story-10 .inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+  #story-10 .kicker { font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #7a5800; margin-bottom: 20px; }
+  #story-10 .layout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  #story-10 h2 { font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 52px); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 24px; }
+  #story-10 .why-matters { font-size: 16px; font-style: italic; color: #5a3e00; margin-bottom: 24px; font-family: 'Fraunces', serif; line-height: 1.5; }
+  #story-10 p { font-size: 16px; line-height: 1.85; color: #2a1a00; }
+  #story-10 p + p { margin-top: 16px; }
+  #story-10 .right-col { padding-top: 16px; }
+  #story-10 .right-col .big-quote { font-family: 'Fraunces', serif; font-size: clamp(44px, 6vw, 80px); font-weight: 900; line-height: 1; color: rgba(0,0,0,.15); margin-bottom: 24px; }
+  #story-10 .stat-stack { display: flex; flex-direction: column; gap: 20px; }
+  #story-10 .stat-item-v .num { font-family: 'Fraunces', serif; font-size: 48px; font-weight: 900; line-height: 1; color: var(--ink); }
+  #story-10 .stat-item-v .label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #7a5800; margin-top: 4px; border-bottom: 1px solid rgba(0,0,0,.15); padding-bottom: 16px; }
+  #story-10 .what-to-do { grid-column: 1 / -1; border-left-color: #7a5800; background: rgba(0,0,0,.06); }
+  #story-10 .what-to-do h4 { color: #7a5800; }
+  @media (max-width: 768px) { #story-10 .layout-grid { grid-template-columns: 1fr; gap: 32px; } }
+  #story-10 .datestamp { color: #7a5800; }
+
+  /* =========================================
+     PATTERNS EMERGING
+  ========================================= */
+  #patterns {
+    background: var(--ink);
+    color: #fff;
+    padding: 80px 0;
+  }
+  #patterns .inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+  #patterns .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-amber); margin-bottom: 24px; }
+  #patterns h2 { font-family: 'Fraunces', serif; font-size: clamp(32px, 5vw, 56px); font-weight: 900; line-height: 1.1; margin-bottom: 48px; letter-spacing: -1px; }
+  #patterns .patterns-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+  #patterns .pattern-card { border-left: 3px solid var(--accent-amber); padding: 24px; background: rgba(255,255,255,.04); }
+  #patterns .pattern-card .p-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.2; }
+  #patterns .pattern-card p { font-size: 14px; color: #999; line-height: 1.7; }
+
+  /* =========================================
+     IDEAS WORTH POSTING
+  ========================================= */
+  #linkedin-ideas {
+    background: #0a66c2;
+    color: #fff;
+    padding: 80px 0;
+  }
+  #linkedin-ideas .inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+  #linkedin-ideas .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 24px; }
+  #linkedin-ideas h2 { font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 48px); font-weight: 900; line-height: 1.1; margin-bottom: 48px; letter-spacing: -1px; }
+  #linkedin-ideas .idea-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  #linkedin-ideas .idea-card { background: rgba(255,255,255,.1); padding: 28px; border-radius: 2px; }
+  #linkedin-ideas .idea-card .num { font-family: 'Fraunces', serif; font-size: 48px; font-weight: 900; color: rgba(255,255,255,.2); line-height: 1; margin-bottom: 12px; }
+  #linkedin-ideas .idea-card h3 { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.3; }
+  #linkedin-ideas .idea-card p { font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.6; }
+
+  /* FOOTER */
+  .mag-footer {
+    background: #000;
+    color: #555;
+    text-align: center;
+    padding: 40px 32px;
+    font-size: 12px;
+    letter-spacing: .08em;
+  }
+  .mag-footer strong { color: #888; }
+
+  /* HOVER EFFECTS */
+  .what-to-do { transition: box-shadow .2s; }
+  .what-to-do:hover { box-shadow: 4px 4px 0 rgba(0,0,0,.1); }
+  #patterns .pattern-card { transition: transform .2s, background .2s; }
+  #patterns .pattern-card:hover { transform: translateY(-4px); background: rgba(255,255,255,.08); }
+  #linkedin-ideas .idea-card { transition: transform .2s, background .2s; }
+  #linkedin-ideas .idea-card:hover { transform: translateY(-4px); background: rgba(255,255,255,.18); }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="brand">Morning Edition</div>
+  <div class="date-tag">Tuesday, May 26, 2026</div>
+  <div class="nav-links">
+    <a href="#story-1">Anthropic</a>
+    <a href="#story-2">OpenAI</a>
+    <a href="#story-3">Meta</a>
+    <a href="#story-4">ROI Paradox</a>
+    <a href="#story-5">Org Design</a>
+    <a href="#story-6">Musk v. Altman</a>
+    <a href="#story-7">AI Sprawl</a>
+    <a href="#story-8">LinkedIn B2B</a>
+    <a href="#story-9">Content Graveyard</a>
+    <a href="#story-10">Super-Users</a>
+    <a href="#patterns">Patterns</a>
+  </div>
+</nav>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-eyebrow">Personalized Intelligence for Jeff Mack</div>
+  <h1>Morning<br>Edition</h1>
+  <div class="edition-date">Tuesday · May 26, 2026 · 10 Stories</div>
+  <div class="issue-kicker">The ROI gap widens. Anthropic closes the biggest private AI raise ever. Meta shows everyone what a workforce reset looks like.</div>
+</header>
+
+<!-- EDITOR'S NOTE -->
+<div class="editors-note">
+  <h2>Three macro forces converged this week — and all of them point directly at your work.</h2>
+  <p>First: the AI capital market is clarifying. Anthropic closing a $30B round at $900B this week — beating OpenAI's valuation — signals that the Claude ecosystem is becoming the enterprise-safe bet for buyers who want capability without OpenAI's governance baggage. That matters for Reejig's positioning and your consulting practice.</p>
+  <p>Second: the adoption-vs-results gap is reaching crisis point. 97% of execs claim they're "benefiting from AI." Only 29% see meaningful organizational ROI. 54% privately admit it's tearing their company apart. This is your market. This is the conversation you're built to lead.</p>
+  <p>Third: workforce restructuring is no longer theoretical. Meta just cut 8,000 people and reassigned 7,000 to AI teams — in public, at scale, with a clear strategic rationale. Every CHRO and CEO watching this is asking: <em>what do we do next?</em> You have an answer.</p>
+</div>
+
+<!-- STORY 1 -->
+<section id="story-1">
+  <div class="hero-inner">
+    <div class="urgent-badge">⚡ Urgent This Week</div>
+    <div class="datestamp">Reported: May 12–26, 2026 · Bloomberg, TechCrunch, Shacknews</div>
+    <div class="kicker">AI Capital Markets · Anthropic</div>
+    <h2>Anthropic Closes the Biggest Private AI Raise in History — This Week</h2>
+    <div class="why-matters">Why it matters to you: The Claude ecosystem is about to become the best-funded enterprise AI platform in the world. Every sales conversation, partnership pitch, and content angle you run on AI adoption now has a new gravitational center.</div>
+    <p>A $30 billion round at a pre-money valuation above $900 billion — expected to close this week — makes Anthropic the most valuable private technology company ever created, surpassing OpenAI's $852B valuation. Sequoia, Dragoneer, Altimeter, and Greenoaks are each coming in at roughly $2 billion. Founders Fund and General Catalyst are following on. The numbers underneath this aren't aspirational: Anthropic posted $4.8B in Q1 2026 revenue and is projecting $10.9B in Q2, with an annualized run rate exceeding $50 billion by June 30.</p>
+    <p>Goldman Sachs, JPMorgan, and Morgan Stanley are already in early discussions as underwriters for an IPO Anthropic is targeting for October 2026. This is expected to be the final private raise. That means the window for enterprises to be early Claude adopters — before it's a public-market story that every analyst has a price target on — is closing fast. The commercial signal for any buyer watching the AI landscape: bet on Anthropic's durability, its enterprise-safe governance narrative, and its Constitutional AI positioning as competitive moat. Claude for Small Business (15 agentic workflows across QuickBooks, HubSpot, Canva, DocuSign, and Microsoft 365) is the mass-market proof-of-concept. Enterprise is next.</p>
+  </div>
+  <div class="stat-bar">
+    <div class="stat-item"><div class="num">$900B</div><div class="label">Pre-money valuation, surpassing OpenAI</div></div>
+    <div class="stat-item"><div class="num">$30B</div><div class="label">Round size closing this week</div></div>
+    <div class="stat-item"><div class="num">$50B+</div><div class="label">Projected annualized run rate by June 30</div></div>
+    <div class="stat-item"><div class="num">Oct '26</div><div class="label">Target IPO window</div></div>
+  </div>
+  <div class="what-to-do">
+    <h4>What to Do With This</h4>
+    <ul>
+      <li><strong>LinkedIn angle:</strong> "Anthropic just became the most valuable private company on earth — and most enterprise buyers still haven't picked a side. Here's what I'd be asking my vendor right now." Frame it as a buyer's playbook.</li>
+      <li><strong>Business implication:</strong> If you're positioning AI consulting services, doubling down on Claude as your preferred toolchain now — before the IPO — locks in a differentiated story. Enterprise buyers will follow the capital.</li>
+      <li><strong>GTM implication:</strong> Any content you've written about "choosing your AI platform" just got dramatically more urgent. This is the triggering event that makes fence-sitters move.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- STORY 2 -->
+<section id="story-2">
+  <div class="inner">
+    <span class="datestamp">Reported: April 24 – May 2026 · OpenAI, Microsoft Azure Blog, SiliconANGLE</span>
+    <div class="urgent-badge">⚡ Strategically Important</div>
+    <div class="kicker">Enterprise AI Infrastructure · OpenAI</div>
+    <h2>OpenAI Frontier: The Enterprise Agent OS Is Here, and It's Running at Oracle, Uber, and State Farm</h2>
+    <div class="why-matters">Why it matters to you: "Build your own AI agents" is no longer a frontier startup story. It's an enterprise infrastructure conversation. Frontier is the clearest articulation yet of what enterprise-grade agentic AI actually looks like at scale.</div>
+    <p>OpenAI's Frontier platform isn't a product — it's a category claim. While competitors embed agents inside a single application or environment, Frontier enables agents to move across an organization's entire systems and data stack, improving over time without requiring manual re-deployment. Oracle, State Farm, and Uber are already live. GPT-5.5, released to the API on April 24, now runs inside Microsoft Foundry with enterprise-grade infrastructure — longer context reasoning, more reliable agentic execution, better computer-use accuracy, greater token efficiency — built for the kind of sustained, high-stakes professional work that enterprise buyers actually care about.</p>
+    <p>The strategic play here is clear: OpenAI is racing to become the infrastructure layer — not the application layer — of enterprise AI. That's the same play Microsoft made with Azure in the cloud era. Whoever wins the "agent orchestration" category wins a multi-decade enterprise relationship. For any enterprise currently evaluating AI infrastructure, the question is no longer "should we use agents?" It's "which orchestration platform do we standardize on, and what's our switching cost if we get it wrong?"</p>
+    <div class="terminal-box">
+      <div class="comment"># The Frontier value proposition in plain language:</div>
+      <div class="hl">Agent.move_across_systems = True</div>
+      <div class="hl">Agent.improve_over_time = True</div>
+      <div class="hl">Agent.single_product_constraint = False</div>
+      <div class="comment"># Translation: this is the OS bet, not the app bet.</div>
+    </div>
+    <div class="what-to-do">
+      <h4>What to Do With This</h4>
+      <ul>
+        <li><strong>LinkedIn angle:</strong> "Enterprise AI just had its 'Azure moment.' OpenAI's Frontier isn't a chatbot. It's an agent OS. And the companies that pick the wrong platform now will spend the next five years migrating." Strong contrarian take.</li>
+        <li><strong>Business implication:</strong> Your consulting clients need a clear "agent orchestration" framework. Help them evaluate Frontier vs. Salesforce Agentforce vs. ServiceNow as strategic infrastructure decisions — not tool evaluations.</li>
+        <li><strong>GTM implication:</strong> The "agentic AI" webinar you've been meaning to pitch just got its anchor content. Frontier gives you a concrete, named platform to build a market education narrative around.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 3 -->
+<section id="story-3">
+  <div class="inner">
+    <div class="alert-stamp">⚡ Workforce Signal</div>
+    <span class="datestamp">Reported: May 20, 2026 · NPR, Gulf News, Yahoo Finance</span>
+    <div class="kicker">Future of Work · Meta</div>
+    <h2>Meta Cut 8,000 Jobs and Reassigned 7,000 More to AI — In Public, On Purpose, With a Clear Playbook</h2>
+    <div class="why-matters">Why it matters to you: Meta just gave every CHRO on the planet a case study they can't ignore. The question your enterprise clients are waking up with today: "Are we doing what Meta did intentionally, or will it happen to us accidentally?"</div>
+    <p>Ten percent of Meta's global workforce — roughly 8,000 people — were notified of layoffs in the first wave of a restructuring framed explicitly as necessary to fund AI expansion. The cuts hit corporate support functions, recruitment, and marketing. Meanwhile, 7,000 people were reassigned to teams working directly on AI projects. This isn't a cost-cutting story — it's an organizational redesign story running at 1:1 scale for the public to watch.</p>
+    <p>What makes this significant beyond the headline number is the framing. Meta has been deliberate about calling this an AI-driven restructuring — not a market downturn response, not a profitability crisis. That language is load-bearing. It signals to every board, every CEO, every executive team: the organization redesign conversation is no longer optional, and the early movers are naming it clearly. For Reejig specifically, this is the demand signal you've been waiting for. Every enterprise HR leader watching this is mentally running the same math on their own org chart.</p>
+    <div class="pull-quote">"The early movers are naming it clearly. Everyone else is just pretending it isn't happening."</div>
+    <p>Standard Chartered simultaneously announced 7,800 job cuts with AI as a stated driver, reinforcing that this isn't a tech-sector-only phenomenon. When a 160-year-old bank and a social media giant use the same playbook within weeks of each other, you have a pattern — not a coincidence.</p>
+    <div class="what-to-do">
+      <h4>What to Do With This</h4>
+      <ul>
+        <li><strong>LinkedIn angle:</strong> "Meta just did publicly what most enterprises are doing quietly. The question isn't whether AI will restructure your workforce — it's whether you're doing it with a strategy or stumbling into it." Provoke the CHRO conversation.</li>
+        <li><strong>Business implication:</strong> This is a referral trigger. Any CHRO you're in contact with right now needs to hear from you this week. This news just made your positioning viscerally relevant.</li>
+        <li><strong>GTM implication:</strong> Build a "Meta Workforce Redesign" case study breakdown for your content pipeline. It's the single most concrete example of the Reejig thesis playing out at global scale.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 4 -->
+<section id="story-4">
+  <div class="inner">
+    <span class="datestamp">Reported: Q1–Q2 2026 · Writer, OutSystems, Deloitte, Futurumgroup</span>
+    <div class="kicker">Enterprise AI · The Productivity Paradox</div>
+    <h2>97% of Executives Claim AI Is Working. 29% Can Actually Prove It. Something Is Broken.</h2>
+    <div class="why-matters">Why it matters to you: This data gap is your market. The distance between AI confidence and AI results is where every consulting engagement, every keynote, and every Reejig pitch lives.</div>
+    <p>The numbers from Q1 2026 research are striking in their consistency across multiple independent studies: 97% of executives say their organization is benefiting from AI. Only 29% report significant ROI from generative AI. Only 23% see meaningful returns from AI agents. 54% of C-suite executives admit that AI adoption is "tearing their company apart." Forty-two percent of companies abandoned most AI initiatives last year; the average organization scrapped 46% of its proofs-of-concept before production.</p>
+    <p>The mechanistic explanation is becoming clearer: individual AI super-users achieve a 5x productivity multiplier, but those gains don't compound across organizations because the structural conditions required to capture them — redesigned workflows, governance frameworks, training infrastructure, data architecture — haven't been put in place. Enterprises are experiencing 51 lost workdays per employee per year to technology friction, even as AI investment hits record highs. The productivity gains exist. They're just not being harvested systematically.</p>
+    <div class="code-block">
+      <span class="hl">// The gap in numbers</span><br>
+      <span class="dim">AI confidence (exec-reported): </span><span class="hl">97%</span><br>
+      <span class="dim">Significant org-level ROI (proven): </span><span class="hl">29%</span><br>
+      <span class="dim">Gap to close: </span><span class="hl">68 percentage points</span><br><br>
+      <span class="hl">// The cost of the gap</span><br>
+      <span class="dim">Lost workdays per employee per year: </span><span class="hl">51</span><br>
+      <span class="dim">POCs scrapped before production: </span><span class="hl">46%</span><br>
+      <span class="dim">Companies that abandoned most AI initiatives: </span><span class="hl">42%</span>
+    </div>
+    <p>The phrase that keeps appearing in multiple research reports: "structural transformation, not just tool deployment." This isn't a technology problem. It's an organizational design problem wearing a technology costume. Which is precisely why the organizations that close the gap will need people who understand both sides.</p>
+    <div class="what-to-do">
+      <h4>What to Do With This</h4>
+      <ul>
+        <li><strong>LinkedIn angle:</strong> Lead with the 97% vs. 29% contrast. "Your CEO just told the board AI is working. Your data says 29% of companies see real ROI. Who's right? And what happens at the board meeting when someone asks for proof?" Sharp, provocative, highly shareable.</li>
+        <li><strong>Business implication:</strong> This is the diagnostic every consulting engagement should open with. Build a "Where Are You in the AI ROI Gap?" assessment tool — it's a lead magnet that writes itself.</li>
+        <li><strong>GTM implication:</strong> Reejig's entire positioning lives in this gap. The pitch isn't "deploy AI." It's "close the gap between AI adoption and AI results." This data gives you the empirical foundation for that argument.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 5 -->
+<section id="story-5">
+  <div class="inner">
+    <span class="datestamp">Published: May 26, 2026 · MIT Technology Review</span>
+    <div class="kicker">Organizational Design · Agentic AI</div>
+    <h2>MIT Technology Review Publishes Today: Rethinking Organizational Design in the Age of Agentic AI</h2>
+    <div class="why-matters">MIT published this piece today, the same morning you're reading this. It's the academic and editorial establishment catching up to what you've been building toward professionally.</div>
+    <p>Agentic AI doesn't just change what people do — it changes how authority, accountability, and coordination work inside organizations. When autonomous agents can initiate tasks, make decisions within defined parameters, and hand work across to other agents or humans, the traditional org chart — designed around human handoffs and managerial oversight — stops being a useful model. The question isn't "where does AI fit in the org?" It's "how do we redesign the org around AI?"</p>
+    <p>The MIT piece, published this morning, argues that the organizations successfully scaling agentic AI are restructuring around outcome accountability rather than activity accountability. They're replacing role-based job descriptions with capability portfolios. They're designing workflows before assigning headcount. And they're treating the agent-human interface as a first-class design problem, not an afterthought. This is the exact intellectual territory Reejig operates in — and it's moving from niche practitioner conversation to mainstream editorial coverage today.</p>
+    <div class="side-col">
+      <div class="side-stat">
+        <div class="big-num">97%</div>
+        <div class="desc">of executives say their company deployed AI agents in the past year</div>
+      </div>
+      <div class="side-stat">
+        <div class="big-num">76%</div>
+        <div class="desc">say their current infrastructure can't support the agentic AI strategy they want</div>
+      </div>
+      <div class="side-stat">
+        <div class="big-num">85%</div>
+        <div class="desc">want to be agentic within three years</div>
+      </div>
+    </div>
+    <div class="what-to-do">
+      <h4>What to Do With This</h4>
+      <ul>
+        <li><strong>LinkedIn angle:</strong> Share the MIT article with your take: "The org chart was designed for human handoffs. Agentic AI just made it obsolete. Here's what the new model actually looks like." Link to the article, add 200 words of your own framework.</li>
+        <li><strong>Business implication:</strong> This is a keynote topic waiting to happen. "Redesigning Your Organization for the Agentic Era" is a talk every CHRO and CIO conference will pay for in H2 2026.</li>
+        <li><strong>GTM implication:</strong> Commission or co-author a longer-form piece that extends MIT's argument with Reejig case data. Academic credibility + practitioner evidence = category-defining content.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 6 -->
+<section id="story-6">
+  <div class="inner">
+    <span class="datestamp">Reported: May 18, 2026 · NPR, NBC News, Axios, CNBC</span>
+    <div class="kicker">Industry Politics · Legal</div>
+    <h2>Musk Loses the AI Trial That Defined a Generation — Jury Deliberated Less Than Two Hours</h2>
+    <div class="why-matters">The verdict doesn't just resolve a lawsuit. It removes the last major legal cloud over OpenAI's commercial trajectory and IPO timeline — clarifying the competitive landscape you operate in.</div>
+    <p>A federal jury in Oakland dismissed all of Elon Musk's claims against Sam Altman and OpenAI in under two hours, adopting the advisory verdict immediately. The case — which sought $134 billion in damages and Altman's removal — alleged that OpenAI had abandoned its founding nonprofit mission in pursuit of profit. The court found the claims were filed outside the statute of limitations, declining to rule on the underlying "breach of charitable trust" question. The claim against Microsoft, named as a defendant alongside OpenAI, was also dismissed.</p>
+    <p>Musk called it a "calendar technicality" on X and announced an appeal. But the market read is cleaner: OpenAI's conversion to a for-profit public benefit corporation now proceeds without judicial interference, and the IPO timeline that analysts have been pricing in — likely late 2026 or early 2027 — is unobstructed. For Anthropic, the verdict is indirectly useful: it reinforces the narrative that the mission-alignment story matters, and Anthropic's Constitutional AI and governance positioning looks more differentiated now that OpenAI has shed its nonprofit framing in public court proceedings.</p>
+    <div class="big-stat-row">
+      <div class="big-stat"><div class="num">&lt;2h</div><div class="label">Time the jury took to deliberate before dismissing all claims</div></div>
+      <div class="big-stat"><div class="num">$134B</div><div class="label">Damages Musk sought — and didn't get</div></div>
+      <div class="big-stat"><div class="num">0</div><div class="label">Claims upheld against OpenAI or Microsoft</div></div>
+    </div>
+    <div class="what-to-do">
+      <h4>What to Do With This</h4>
+      <ul>
+        <li><strong>LinkedIn angle:</strong> "The Musk v. Altman verdict didn't just clear OpenAI — it clarified the AI industry's governance story. Here's what the verdict actually means for enterprises choosing their AI partners." Position as strategic analysis, not legal commentary.</li>
+        <li><strong>Business implication:</strong> Client conversations about AI vendor risk just got simpler on the OpenAI side. But the governance question Musk raised — "who does this AI serve?" — doesn't go away. Anthropic's positioning answers it more clearly than ever.</li>
+        <li><strong>GTM implication:</strong> Write a short piece on "How to evaluate your AI vendor's governance story." Use the trial as a hook, deliver strategic value for enterprise buyers.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 7 -->
+<section id="story-7">
+  <div class="inner">
+    <span class="datestamp">Reported: April 7, 2026 · OutSystems Research, BusinessWire</span>
+    <div class="kicker">Enterprise AI Strategy · Agent Sprawl</div>
+    <h2>94% of Enterprises Fear Their Own AI Sprawl — And Most Can't Define What "Agentic" Even Means Yet</h2>
+    <div class="why-matters">This is the organizational immune system kicking in. The same organizations racing to deploy agents are terrified of what happens when those agents multiply beyond their ability to govern them.</div>
+    <p>OutSystems research published in April found that 94% of organizations — nearly every company surveyed — raised concerns about AI sprawl increasing complexity, technical debt, and security risk. This is a striking simultaneous truth: agentic AI is mainstream (96% are already using it in some capacity), and the fear of it is equally universal. The gap between aspiration and infrastructure is measurable: 85% of organizations say they want to be fully agentic within three years, while 76% admit their current operations and infrastructure cannot support that transition.</p>
+    <p>ServiceNow and Accenture formalized a response to this dynamic in early May with a forward-deployed engineering program specifically designed to take agentic AI from pilot to production at scale — an acknowledgment that the gap between "we built a proof of concept" and "this is running in production across our organization" is wider than most enterprises expected. Salesforce's Agentforce added a "Coworker" surface in late May to embed AI teammates directly into searchable interfaces. Anthropic updated Claude Managed Agents with self-hosted sandboxes. The infrastructure to govern agents is building — but it's building more slowly than the agents themselves are proliferating.</p>
+    <div class="mega-pull-quote">"The problem isn't that enterprises can't deploy AI agents. The problem is that 94% of them can't govern what they've already deployed."</div>
+    <div class="what-to-do">
+      <h4>What to Do With This</h4>
+      <ul>
+        <li><strong>LinkedIn angle:</strong> "AI sprawl is the new technical debt. And it's accumulating faster than most companies realize. Here's a 3-question audit every enterprise should run before deploying another agent." Practical, actionable, highly shareable.</li>
+        <li><strong>Business implication:</strong> "AI Governance" is a consulting practice area that doesn't yet have clear leaders. The fear driving this 94% statistic is a business development signal worth acting on now.</li>
+        <li><strong>GTM implication:</strong> A downloadable "Agent Governance Checklist" would be a high-converting lead magnet for exactly the enterprise buyers Reejig and your consulting practice targets.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 8 -->
+<section id="story-8">
+  <div class="inner">
+    <span class="datestamp">Reported: 2026 · Dreamdata LinkedIn Ads Benchmarks Report; Demand Gen Report</span>
+    <div class="kicker">B2B Marketing · LinkedIn Performance</div>
+    <h2>LinkedIn Delivers 121% ROAS and Leads Every B2B Ad Platform — While 94% of Buyers Now Research with AI Before Talking to Sales</h2>
+    <div class="why-matters">Two converging forces are rewriting B2B demand generation. LinkedIn is where enterprise buyers spend attention. Generative AI is where they form opinions before you ever reach them. Your marketing stack needs to account for both.</div>
+    <p>Dreamdata's 2026 LinkedIn Ads Benchmarks Report confirmed what practitioners have been arguing for two years: LinkedIn outperforms Google and Meta for B2B with a 121% return on ad spend. With over 1 billion members and 65 million decision-makers active on the platform, this isn't a niche channel anymore — it's the primary enterprise buyer attention surface. Meanwhile, 81% of B2B buyers are now making vendor decisions before engaging sales teams at all, and 94% are using generative AI as their primary research tool during the buying process.</p>
+    <p>The implication for your own content strategy and for every enterprise GTM motion you advise on: the content that shapes buyer perception isn't your website, your SDR sequence, or your nurture stream. It's what AI models say about you when a buyer asks "what are the leading solutions for [your category]?" That's the new SEO — AI search optimization — and it's driven by the depth, quality, and citation-worthiness of your content, not by keyword density. The enterprise brands winning in 2026 are the ones showing up in Perplexity, Claude, and GPT-5.5 answers before any sales conversation begins.</p>
+    <div class="dashboard-grid">
+      <div class="dashboard-card"><div class="card-label">LinkedIn ROAS</div><div class="card-val">121%</div><div class="card-sub">vs. Google and Meta for B2B</div></div>
+      <div class="dashboard-card"><div class="card-label">Buyers pre-deciding</div><div class="card-val">81%</div><div class="card-sub">Make decisions before talking to sales</div></div>
+      <div class="dashboard-card"><div class="card-label">AI-first research</div><div class="card-val">94%</div><div class="card-sub">Use gen AI as primary buying research tool</div></div>
+    </div>
+    <div class="what-to-do">
+      <h4>What to Do With This</h4>
+      <ul>
+        <li><strong>LinkedIn angle:</strong> "94% of your buyers just researched you using ChatGPT or Claude — before they ever talked to your team. What did they find? Here's how to audit your AI search presence in 10 minutes."</li>
+        <li><strong>Business implication:</strong> The consulting opportunity here is "AI Search Presence Audit" — a service that assesses how enterprise brands appear in AI model responses, and builds the content infrastructure to improve it.</li>
+        <li><strong>GTM implication:</strong> LinkedIn's ROAS advantage combined with AI-first buyer research means your LinkedIn content strategy IS your demand generation strategy. These aren't separate tactics anymore.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 9 -->
+<section id="story-9">
+  <div class="inner">
+    <span class="datestamp">Emerging pattern · Multiple sources including Marketing Brew, Demand Gen Report, Warmly, 2026</span>
+    <div class="kicker">Marketing Strategy · The Signal-to-Noise Crisis</div>
+    <h2>Every Whitepaper Sounds the Same. Robot-to-Robot Outreach Is the New Spam. The "Infinite Content Graveyard" Has Arrived.</h2>
+    <div class="byline">A synthesized pattern from multiple marketing and GTM research sources</div>
+    <div class="why-matters">In 2026, "AI-powered" is no longer a differentiator — it's the baseline. And the paradox of universal AI adoption in marketing is that it's creating a homogenization crisis. The brands that win will be the ones that sound most distinctly human.</div>
+    <div class="cols">
+      <p>Marketing practitioners have a name for what's happening: the "Infinite Content Graveyard." Every GTM team now has the ability to produce personalized outreach, thought leadership, case studies, and campaign assets at unprecedented volume. The result is that the volume of content in every channel has increased dramatically while the signal-to-noise ratio has collapsed. Every LinkedIn message feels like a template. Every whitepaper reads like a summary of other whitepapers. Every outbound email arrives with the same six pain points in the same sequence.</p>
+      <p>The mechanism is straightforward: when every company uses the same AI tools to generate the same type of content aimed at the same ICP personas using the same best-practice frameworks, the content converges toward a mean. Personalization at scale, it turns out, produces personalization that feels impersonal at scale. The escape from this dynamic isn't more AI — it's more distinctly human perspective, sharper editorial voice, and genuine expertise that can't be pattern-matched from training data.</p>
+      <p>The marketers winning right now share a specific characteristic: they have a point of view that can't be generated. They're not summarizing what's known — they're advancing what's next. They lead with proprietary data, original research, or earned insight from genuine practitioner experience. For B2B buyers who are now using AI to research vendors before any human interaction, the content that stands out is the content that reads like it was written by someone who has actually done the thing — not a content brief filtered through a language model.</p>
+      <p>The practical implication: the best marketing investment a B2B company can make in 2026 is not a better AI content tool. It's identifying the two or three people in the organization with genuine, non-replicable expertise — and building a content engine around their actual perspective. Scarcity has returned to content marketing. The scarce resource is now originality.</p>
+    </div>
+    <div class="what-to-do">
+      <h4>What to Do With This</h4>
+      <ul>
+        <li><strong>LinkedIn angle:</strong> "AI gave everyone a megaphone. Now all anyone hears is noise. The brands winning in 2026 have something AI can't replicate: a genuine point of view. Here's what that actually looks like in practice." This one could hit big.</li>
+        <li><strong>Business implication:</strong> For your consulting practice, this is a product positioning insight: "We help enterprise marketing teams build content strategies around human expertise, not content volume." The differentiation story writes itself.</li>
+        <li><strong>GTM implication:</strong> Your newsletter Always Interesting is a direct competitive advantage in this environment. A consistent editorial voice with genuine perspective is now rare — and valuable in ways it hasn't been in years.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 10 -->
+<section id="story-10">
+  <div class="inner">
+    <div class="kicker">Future of Work · The AI Class Divide</div>
+    <div class="layout-grid">
+      <div>
+        <span class="datestamp">Reported: 2026 · Gallup, Deloitte, Writer, AutoFaceless</span>
+        <h2>AI Super-Users Save Nine Hours a Week. Everyone Else Saves Two. The Workplace Class System Just Got Real.</h2>
+        <div class="why-matters">The AI productivity divide isn't coming — it's already measurable, already affecting promotions, and already shaping which employees 60% of C-suite executives plan to let go.</div>
+        <p>Gallup and Deloitte's 2026 workforce research reveals a structural divide that's accelerating: AI super-users save nine hours per week — 4.5 times more than average AI users, and effectively working a four-day week while others work five. They're three times more likely to have received a promotion and a raise in the past twelve months. Meanwhile, 60% of C-suite executives say they plan layoffs specifically targeting employees who haven't adopted AI into their workflows. The "AI elite" — a term 92% of C-suite executives admit they're actively cultivating — are becoming a protected class inside organizations.</p>
+        <p>The workforce implications compound in one direction: the organizations that close the super-user gap by systematically training all employees — not just the early adopters — will extract enterprise-level ROI rather than individual-level productivity. But most organizations aren't doing this. More than half of the global workforce (56%) reported receiving no recent AI training, and 57% lack access to mentorship for AI skill development. This is Reejig's market at its most specific: the gap between the super-user and the laggard is a structural, solvable problem — and the organizations that solve it first will be the ones that close the ROI gap documented in Story 4.</p>
+      </div>
+      <div class="right-col">
+        <div class="big-quote">9h</div>
+        <div class="stat-stack">
+          <div class="stat-item-v"><div class="num">9hrs</div><div class="label">Saved per week by AI super-users (vs. 2hrs for average adopters)</div></div>
+          <div class="stat-item-v"><div class="num">3×</div><div class="label">More likely to have been promoted in the last year</div></div>
+          <div class="stat-item-v"><div class="num">60%</div><div class="label">Of C-suite plan layoffs targeting non-AI adopters</div></div>
+          <div class="stat-item-v"><div class="num">56%</div><div class="label">Of global workforce received no AI training in the past year</div></div>
+        </div>
+      </div>
+      <div class="what-to-do">
+        <h4>What to Do With This</h4>
+        <ul>
+          <li><strong>LinkedIn angle:</strong> "The new workplace class divide isn't about education or experience. It's about whether you've learned to use AI well. 60% of CEOs plan to lay off people who haven't. Here's what separates a super-user from a laggard — and how to close the gap." Direct, provocative, shareable.</li>
+          <li><strong>Business implication:</strong> This data set is a Reejig sales deck in waiting. The 9-hour/week productivity delta, compounded across thousands of employees, is a CFO-ready ROI argument for investing in workforce AI capability — not just AI tools.</li>
+          <li><strong>GTM implication:</strong> "Super-User Gap Assessment" is another lead magnet concept — a simple diagnostic that helps enterprises measure where their workforce sits on the adoption curve and what it's costing them.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PATTERNS EMERGING -->
+<section id="patterns">
+  <div class="inner">
+    <div class="eyebrow">Synthesis</div>
+    <h2>Patterns Emerging<br>Across Today's Stories</h2>
+    <div class="patterns-grid">
+      <div class="pattern-card">
+        <div class="p-title">The Adoption-Results Gap Is the Story of 2026</div>
+        <p>Universal AI adoption + low organizational ROI = a structural gap that isn't closing on its own. Four separate stories today point to this. The organizations that systematically close it will define the decade.</p>
+      </div>
+      <div class="pattern-card">
+        <div class="p-title">The Capital Is Picking Sides</div>
+        <p>Anthropic at $900B. OpenAI at $852B. GPT-5.5 in Microsoft Foundry. The enterprise AI infrastructure stack is consolidating around two or three platforms. The window for enterprise buyers to make strategic platform decisions — before IPOs lock in pricing and positioning — is closing.</p>
+      </div>
+      <div class="pattern-card">
+        <div class="p-title">Workforce Restructuring Is the Visible Hand of AI</div>
+        <p>Meta (8,000 laid off, 7,000 reassigned). Standard Chartered (7,800 cut). The AI workforce transition that has been theoretical for three years is now executing in plain sight. Every enterprise leadership team is watching and calculating.</p>
+      </div>
+      <div class="pattern-card">
+        <div class="p-title">Content Differentiation Is Returning to Human Expertise</div>
+        <p>As AI homogenizes content at scale, the scarce resource is original perspective. The brands and individuals who've built genuine expertise and a distinctive editorial voice are suddenly operating with a structural advantage they didn't have two years ago.</p>
+      </div>
+      <div class="pattern-card">
+        <div class="p-title">The Agent Governance Gap Is Opening</div>
+        <p>94% of enterprises fear the AI sprawl they've already created. The infrastructure to govern agents is building more slowly than agents are being deployed. "AI Governance" is the next enterprise consulting category.</p>
+      </div>
+      <div class="pattern-card">
+        <div class="p-title">AI Research Is Rewriting Buyer Behavior</div>
+        <p>94% of B2B buyers use generative AI as their primary research tool before engaging sales. The implication: AI models ARE the new search engine, and "AI search optimization" — showing up in Claude's and GPT's answers — is the new SEO priority.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LINKEDIN IDEAS -->
+<section id="linkedin-ideas">
+  <div class="inner">
+    <div class="eyebrow">Content Engine</div>
+    <h2>Ideas Worth Posting<br>About Today</h2>
+    <div class="idea-list">
+      <div class="idea-card">
+        <div class="num">01</div>
+        <h3>The 97 vs. 29 Provocation</h3>
+        <p>"97% of execs say AI is working. 29% can prove it. The gap between confidence and evidence is where most enterprise AI initiatives go to die — and where the real work begins." Lead with the data, follow with your framework for closing it. Tag it to the Deloitte/Writer research. High engagement potential with CHROs and CIOs.</p>
+      </div>
+      <div class="idea-card">
+        <div class="num">02</div>
+        <h3>The Meta Workforce Redesign Take</h3>
+        <p>"Meta just did publicly what most enterprises are doing quietly: cut the roles AI is replacing, and reassigned humans to work alongside it. The question every CHRO is sitting with right now is whether to do this with a strategy or wait for it to happen to them." Add your perspective on what a proactive workforce redesign looks like.</p>
+      </div>
+      <div class="idea-card">
+        <div class="num">03</div>
+        <h3>The Infinite Content Graveyard Warning</h3>
+        <p>"AI gave every marketing team a content factory. The problem: every factory is making the same thing. In 2026, the most valuable marketing asset isn't better AI tooling — it's a genuine point of view that can't be generated." Speak directly from your experience. This angle resonates with CMOs, demand gen leaders, and content strategists — exactly your audience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="mag-footer">
+  <strong>Morning Edition</strong> — Personalized for Jeff Mack · Tuesday, May 26, 2026<br>
+  Compiled from Bloomberg, TechCrunch, MIT Technology Review, NPR, Axios, Dreamdata, OutSystems, Deloitte, Writer, Gallup, OpenAI, Microsoft Azure Blog, and multiple enterprise research reports.
+</footer>
+
+</body>
+</html>
